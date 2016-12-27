@@ -71,31 +71,31 @@
 
     <!--Define a mapping from key-in to the method that handles the key-in.-->
     <KeyinHandlers>
-        <KeyinHandler Keyin="WPAddin OPEN DIALOG" Function="ECApiExample.KeyinCommands.ECApiExampleCommand"/>
-        <KeyinHandler Keyin="WPAddin PLACE Widget" Function="ECApiExample.KeyinCommands.ECApiExamplePlacementCommand"/>
-        <KeyinHandler Keyin="WPAddin LOCATE General" Function="ECApiExample.KeyinCommands.ECApiExampleLocateCommand"/>
-        <KeyinHandler Keyin="WPAddin LOCATE Widget" Function="ECApiExample.KeyinCommands.ECApiExampleLocateWidgetCommand"/>
-        <KeyinHandler Keyin="WPAddin Import" Function="ECApiExample.KeyinCommands.ECApiExampleImportSchema"/>
-        <KeyinHandler Keyin="WPAddin AddClasses" Function="ECApiExample.KeyinCommands.ECApiExampleAddClassesToElement"/>
-        <KeyinHandler Keyin="WPAddin AddNamedGroup" Function="ECApiExample.KeyinCommands.ECApiExampleItemSet"/>
-        <KeyinHandler Keyin="WPAddin Place WorkTask" Function="ECApiExample.KeyinCommands.ECApiExamplePlaceWorkTask"/>
-      <KeyinHandler Keyin="WPAddin UnEmbed" Function="ECApiExample.KeyinCommands.ECApiExampleUnEmbedSchema"/>
-      <KeyinHandler Keyin="WPAddin Place OfficeInfo" Function="ECApiExample.KeyinCommands.ECApiExamplePlaceOfficeInfo"/>
-      <KeyinHandler Keyin="WPAddin FindInstOf" Function="ECApiExample.KeyinCommands.ECApiExampleFindInstancesOf"/>
-      <KeyinHandler Keyin="WPAddin FindSchemaFor" Function="ECApiExample.KeyinCommands.FindSchemaForClass"/>
-      <KeyinHandler Keyin="WPAddin OPEN Finder" Function="ECApiExample.KeyinCommands.ECApiExampleFindClassInstance"/>
-      <KeyinHandler Keyin="WPAddin OPEN ClassInfo" Function="ECApiExample.KeyinCommands.ECApiExampleFindClassInstances"/>
-      <KeyinHandler Keyin="WPAddin OPEN Chat" Function="ECApiExample.KeyinCommands.StartWSChat"/>
-      <KeyinHandler Keyin="WPAddin Chat Send" Function="ECApiExample.KeyinCommands.SendMessage"/>
-      <KeyinHandler Keyin="WPAddin Gather" Function="ECApiExample.KeyinCommands.GatherElements"/>
-      <KeyinHandler Keyin="WPAddin ItemSet Build" Function="ECApiExample.KeyinCommands.AddElementToItemSet"/>
-      <KeyinHandler Keyin="WPAddin ItemSet Get" Function="ECApiExample.KeyinCommands.GetElementsInItemSet"/>
-      <KeyinHandler Keyin="WPAddin ItemSet OpenWork" Function="ECApiExample.KeyinCommands.OpenWorkFile"/>
-      <KeyinHandler Keyin="WPAddin ItemSet Add" Function="ECApiExample.KeyinCommands.BuildList"/>
-      <KeyinHandler Keyin="WPAddin ItemSet Process" Function="ECApiExample.KeyinCommands.ProcessList"/>
-      <KeyinHandler Keyin="WPAddin ItemSet New" Function="ECApiExample.KeyinCommands.NewList"/>
-      <KeyinHandler Keyin="WPAddin ItemSet Move" Function="ECApiExample.KeyinCommands.MoveBetweenGroups"/>
-      <KeyinHandler Keyin="WPAddin ItemSet Close" Function="ECApiExample.KeyinCommands.CloseConnection"/>
+        <KeyinHandler Keyin="WPAddin OPEN DIALOG" Function="WorkPackageApplication.KeyinCommands.ECApiExampleCommand"/>
+        <KeyinHandler Keyin="WPAddin PLACE Widget" Function="WorkPackageApplication.KeyinCommands.ECApiExamplePlacementCommand"/>
+        <KeyinHandler Keyin="WPAddin LOCATE General" Function="WorkPackageApplication.KeyinCommands.ECApiExampleLocateCommand"/>
+        <KeyinHandler Keyin="WPAddin LOCATE Widget" Function="WorkPackageApplication.KeyinCommands.ECApiExampleLocateWidgetCommand"/>
+        <KeyinHandler Keyin="WPAddin Import" Function="WorkPackageApplication.KeyinCommands.ECApiExampleImportSchema"/>
+        <KeyinHandler Keyin="WPAddin AddClasses" Function="WorkPackageApplication.KeyinCommands.ECApiExampleAddClassesToElement"/>
+        <KeyinHandler Keyin="WPAddin AddNamedGroup" Function="WorkPackageApplication.KeyinCommands.ECApiExampleItemSet"/>
+        <KeyinHandler Keyin="WPAddin Place WorkTask" Function="WorkPackageApplication.KeyinCommands.ECApiExamplePlaceWorkTask"/>
+      <KeyinHandler Keyin="WPAddin UnEmbed" Function="WorkPackageApplication.KeyinCommands.ECApiExampleUnEmbedSchema"/>
+      <KeyinHandler Keyin="WPAddin Place OfficeInfo" Function="WorkPackageApplication.KeyinCommands.ECApiExamplePlaceOfficeInfo"/>
+      <KeyinHandler Keyin="WPAddin FindInstOf" Function="WorkPackageApplication.KeyinCommands.ECApiExampleFindInstancesOf"/>
+      <KeyinHandler Keyin="WPAddin FindSchemaFor" Function="WorkPackageApplication.KeyinCommands.FindSchemaForClass"/>
+      <KeyinHandler Keyin="WPAddin OPEN Finder" Function="WorkPackageApplication.KeyinCommands.ECApiExampleFindClassInstance"/>
+      <KeyinHandler Keyin="WPAddin OPEN ClassInfo" Function="WorkPackageApplication.KeyinCommands.ECApiExampleFindClassInstances"/>
+      <KeyinHandler Keyin="WPAddin OPEN Chat" Function="WorkPackageApplication.KeyinCommands.StartWSChat"/>
+      <KeyinHandler Keyin="WPAddin Chat Send" Function="WorkPackageApplication.KeyinCommands.SendMessage"/>
+      <KeyinHandler Keyin="WPAddin Gather" Function="WorkPackageApplication.KeyinCommands.GatherElements"/>
+      <KeyinHandler Keyin="WPAddin ItemSet Build" Function="WorkPackageApplication.KeyinCommands.AddElementToItemSet"/>
+      <KeyinHandler Keyin="WPAddin ItemSet Get" Function="WorkPackageApplication.KeyinCommands.GetElementsInItemSet"/>
+      <KeyinHandler Keyin="WPAddin ItemSet OpenWork" Function="WorkPackageApplication.KeyinCommands.OpenWorkFile"/>
+      <KeyinHandler Keyin="WPAddin ItemSet Add" Function="WorkPackageApplication.KeyinCommands.BuildList"/>
+      <KeyinHandler Keyin="WPAddin ItemSet Process" Function="WorkPackageApplication.KeyinCommands.ProcessList"/>
+      <KeyinHandler Keyin="WPAddin ItemSet New" Function="WorkPackageApplication.KeyinCommands.NewList"/>
+      <KeyinHandler Keyin="WPAddin ItemSet Move" Function="WorkPackageApplication.KeyinCommands.MoveBetweenGroups"/>
+      <KeyinHandler Keyin="WPAddin ItemSet Close" Function="WorkPackageApplication.KeyinCommands.CloseConnection"/>
     </KeyinHandlers>
 
 
