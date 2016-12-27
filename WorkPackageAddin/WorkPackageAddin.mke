@@ -1,0 +1,33 @@
+#----------------------------------------------------------------------
+#
+#  $Copyright: (c) 2005 Bentley Systems, Incorporated. All rights reserved. $
+#
+#  Application Make File
+#
+$RCSfile: ECApiExample.mke,v $
+#   $Revision: 2.0 $
+#       $Date: 2007/11/12 13:13:57 $
+#  $Copyright: (c) 2006 Bentley Systems, Incorporated. All rights reserved. $
+#
+#  "MicroStation" is a registered trademark and "MDL" and "MicroCSL"
+#  are trademarks of Bentley Systems, Inc.
+#
+#  Limited permission is hereby granted to reproduce and modify this
+#  copyrighted material provided that the resulting code is used only
+#  in conjunction with Bentley Systems products under the terms of the
+#  license agreement provided therein, and that this notice is retained
+#  in its entirety in any such reproduction or modification.
+#
+#----------------------------------------------------------------------
+%include    mdl.mki
+
+appName = ECApiExample
+
+MSB-BaseIntermediateOutputPath = $(mdlapps)$(appName)/
+MSB-OutputPath=$(mdlapps)
+o = $(MSB-BaseIntermediateOutputPath)$(Configuration)/
+
+buildSolution:
+    !~@mkdir $(o)
+    |[== Building $(appName) ==]
+    ~task msbuild $(CommonMSBuildOpts) -i:Projects=$(_MakeFilePath)$(appName).csproj

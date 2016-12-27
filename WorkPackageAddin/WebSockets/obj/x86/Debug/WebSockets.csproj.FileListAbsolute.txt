@@ -1,0 +1,12 @@
+C:\Users\andersma\Documents\BentleyCode\MS-Athens\ecApiExample\ECApiExample\webSockets\bin\Debug\WebSocketsClient.dll
+C:\Users\andersma\Documents\BentleyCode\MS-Athens\ecApiExample\ECApiExample\webSockets\bin\Debug\WebSocketsClient.pdb
+C:\Program Files (x86)\Bentley\OpenPlantModeler V8i\OpenPlantModeler\mdlapps\WebSocketsClient.dll
+C:\Program Files (x86)\Bentley\OpenPlantModeler V8i\OpenPlantModeler\mdlapps\WebSocketsClient.pdb
+C:\Program Files (x86)\Bentley\ABDV8iSS6\AECOsimBuildingDesigner\mdlapps\WebSocketsClient.dll
+C:\Program Files (x86)\Bentley\ABDV8iSS6\AECOsimBuildingDesigner\mdlapps\WebSocketsClient.pdb
+C:\Users\andersma\Documents\BentleyCode\MS-Athens\ECApiExample\ECApiExample\WebSockets\obj\x86\Debug\WebSocketsClient.dll
+C:\Users\andersma\Documents\BentleyCode\MS-Athens\ECApiExample\ECApiExample\WebSockets\obj\x86\Debug\WebSocketsClient.pdb
+C:\Data\Projects\WorkPackageApplication\ECApiExample\WebSockets\obj\x86\Debug\WebSocketsClient.dll
+C:\Data\Projects\WorkPackageApplication\ECApiExample\WebSockets\obj\x86\Debug\WebSocketsClient.pdb
+C:\Data\Projects\WorkPackageApplication\WorkPackageAddin\WebSockets\obj\x86\Debug\WebSocketsClient.dll
+C:\Data\Projects\WorkPackageApplication\WorkPackageAddin\WebSockets\obj\x86\Debug\WebSocketsClient.pdb

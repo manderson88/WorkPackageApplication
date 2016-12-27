@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+    
+    <!--The commands.xml contains 3 main sections. <RootKeyinTable> defines the root of the 
+        command table tree. <SubKeyinTables> defines all of the subtrees that appear in the
+        tree. <KeyinHandlers> provides a mapping from key-in string to the method that handles
+        the key-in.-->
+
+    <!--Define the root. The entry for the root is very similar to an entry in the
+        table of subentries. The diference is that the entry for the root is labelled
+        RootKeyinTable, but an entry for a subtable is labelled as KeyinTable.-->
+    <RootKeyinTable ID="root">
+        <Keyword SubtableRef="WorkPackageAddin" 
+                CommandClass="MacroCommand" CommandWord="WPAddin" >
+                <Options Required="true"/>
+                </Keyword>
+    </RootKeyinTable>
+
+
+    <!--Define subtables-->
+    <SubKeyinTables>
+        <!--CellUtility subtable-->
+        <KeyinTable ID="WorkPackageAddin">
+            <Keyword SubtableRef="GUI" CommandWord="Open"><Options Required="true"/> </Keyword>
+            <Keyword SubtableRef="Object" CommandWord="Place"><Options Required="true"/> </Keyword>
+            <Keyword SubtableRef="LocEle" CommandWord="Locate"><Options Required="true"/> </Keyword>
+            <Keyword CommandWord="Import"> </Keyword>
+            <Keyword CommandWord="AddClasses"></Keyword>
+            <Keyword CommandWord="AddNamedGroup"></Keyword>
+          <Keyword CommandWord="UnEmbed"></Keyword>
+          <Keyword CommandWord="FindInstOf"></Keyword>
+          <Keyword CommandWord="FindSchemaFor"></Keyword>
+          <Keyword CommandWord="Gather"></Keyword>
+          <Keyword SubtableRef="WebSocket" CommandWord="Chat"><Options Required="true"/></Keyword>
+          <Keyword SubtableRef="Build" CommandWord="ItemSet"><Options Required="true"/></Keyword>
+        </KeyinTable>
+      
+      <KeyinTable ID="WebSocket">
+        <Keyword CommandWord="Send"></Keyword>
+      </KeyinTable>
+      
+      <KeyinTable ID="Build">
+        <Keyword CommandWord="Build"></Keyword>
+        <Keyword CommandWord="Get"></Keyword>
+        <Keyword CommandWord="OpenWork"></Keyword>
+        <Keyword CommandWord="Add"></Keyword>
+        <Keyword CommandWord="Process"></Keyword>
+        <Keyword CommandWord="New"></Keyword>
+        <Keyword CommandWord="Move"></Keyword>
+        <Keyword CommandWord="Close"></Keyword>
+      </KeyinTable>
+      
+      <KeyinTable ID="LocEle">
+        <Keyword CommandWord="General"></Keyword>
+        <Keyword CommandWord="Widget"></Keyword>
+      </KeyinTable>
+      
+      <KeyinTable ID="Object">
+        <Keyword CommandWord="Widget"></Keyword>
+        <Keyword CommandWord="WorkTask"></Keyword>
+        <Keyword CommandWord="OfficeInfo"></Keyword>
+      </KeyinTable>
+      
+      <KeyinTable ID="GUI">
+        <Keyword CommandWord="Dialog"></Keyword>
+        <Keyword CommandWord="ClassInfo"></Keyword>
+        <Keyword CommandWord="Finder"></Keyword>
+        <Keyword CommandWord="Chat"></Keyword>
+      </KeyinTable>
+    </SubKeyinTables>
+
+    <!--Define a mapping from key-in to the method that handles the key-in.-->
+    <KeyinHandlers>
+        <KeyinHandler Keyin="WPAddin OPEN DIALOG" Function="ECApiExample.KeyinCommands.ECApiExampleCommand"/>
+        <KeyinHandler Keyin="WPAddin PLACE Widget" Function="ECApiExample.KeyinCommands.ECApiExamplePlacementCommand"/>
+        <KeyinHandler Keyin="WPAddin LOCATE General" Function="ECApiExample.KeyinCommands.ECApiExampleLocateCommand"/>
+        <KeyinHandler Keyin="WPAddin LOCATE Widget" Function="ECApiExample.KeyinCommands.ECApiExampleLocateWidgetCommand"/>
+        <KeyinHandler Keyin="WPAddin Import" Function="ECApiExample.KeyinCommands.ECApiExampleImportSchema"/>
+        <KeyinHandler Keyin="WPAddin AddClasses" Function="ECApiExample.KeyinCommands.ECApiExampleAddClassesToElement"/>
+        <KeyinHandler Keyin="WPAddin AddNamedGroup" Function="ECApiExample.KeyinCommands.ECApiExampleItemSet"/>
+        <KeyinHandler Keyin="WPAddin Place WorkTask" Function="ECApiExample.KeyinCommands.ECApiExamplePlaceWorkTask"/>
+      <KeyinHandler Keyin="WPAddin UnEmbed" Function="ECApiExample.KeyinCommands.ECApiExampleUnEmbedSchema"/>
+      <KeyinHandler Keyin="WPAddin Place OfficeInfo" Function="ECApiExample.KeyinCommands.ECApiExamplePlaceOfficeInfo"/>
+      <KeyinHandler Keyin="WPAddin FindInstOf" Function="ECApiExample.KeyinCommands.ECApiExampleFindInstancesOf"/>
+      <KeyinHandler Keyin="WPAddin FindSchemaFor" Function="ECApiExample.KeyinCommands.FindSchemaForClass"/>
+      <KeyinHandler Keyin="WPAddin OPEN Finder" Function="ECApiExample.KeyinCommands.ECApiExampleFindClassInstance"/>
+      <KeyinHandler Keyin="WPAddin OPEN ClassInfo" Function="ECApiExample.KeyinCommands.ECApiExampleFindClassInstances"/>
+      <KeyinHandler Keyin="WPAddin OPEN Chat" Function="ECApiExample.KeyinCommands.StartWSChat"/>
+      <KeyinHandler Keyin="WPAddin Chat Send" Function="ECApiExample.KeyinCommands.SendMessage"/>
+      <KeyinHandler Keyin="WPAddin Gather" Function="ECApiExample.KeyinCommands.GatherElements"/>
+      <KeyinHandler Keyin="WPAddin ItemSet Build" Function="ECApiExample.KeyinCommands.AddElementToItemSet"/>
+      <KeyinHandler Keyin="WPAddin ItemSet Get" Function="ECApiExample.KeyinCommands.GetElementsInItemSet"/>
+      <KeyinHandler Keyin="WPAddin ItemSet OpenWork" Function="ECApiExample.KeyinCommands.OpenWorkFile"/>
+      <KeyinHandler Keyin="WPAddin ItemSet Add" Function="ECApiExample.KeyinCommands.BuildList"/>
+      <KeyinHandler Keyin="WPAddin ItemSet Process" Function="ECApiExample.KeyinCommands.ProcessList"/>
+      <KeyinHandler Keyin="WPAddin ItemSet New" Function="ECApiExample.KeyinCommands.NewList"/>
+      <KeyinHandler Keyin="WPAddin ItemSet Move" Function="ECApiExample.KeyinCommands.MoveBetweenGroups"/>
+      <KeyinHandler Keyin="WPAddin ItemSet Close" Function="ECApiExample.KeyinCommands.CloseConnection"/>
+    </KeyinHandlers>
+
+
+</KeyinTree>
+ 
