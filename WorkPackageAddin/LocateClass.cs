@@ -1,4 +1,41 @@
-﻿using System;
+﻿/*--------------------------------------------------------------------------------------+
+//----------------------------------------------------------------------------
+// DOCUMENT ID:   
+// LIBRARY:       
+// CREATOR:       Mark Anderson
+// DATE:          05-05-2016
+//
+// NAME:          LocateClass.cs
+//
+// DESCRIPTION:   Utility methods to work with EC attributes and DDGN elements.
+//
+// REFERENCES:    ECAPI.
+//
+// ---------------------------------------------------------------------------
+// NOTICE
+//    NOTICE TO ALL PERSONS HAVING ACCESS HERETO:  This document or
+//    recording contains computer software or related information
+//    constituting proprietary trade secrets of Black & Veatch, which
+//    have been maintained in "unpublished" status under the copyright
+//    laws, and which are to be treated by all persons having acdcess
+//    thereto in manner to preserve the status thereof as legally
+//    protectable trade secrets by neither using nor disclosing the
+//    same to others except as may be expressly authorized in advance
+//    by Black & Veatch.  However, it is intended that all prospective
+//    rights under the copyrigtht laws in the event of future
+//    "publication" of this work shall also be reserved; for which
+//    purpose only, the following is included in this notice, to wit,
+//    "(C) COPYRIGHT 1997 BY BLACK & VEATCH, ALL RIGHTS RESERVED"
+// ---------------------------------------------------------------------------
+/*
+/* CHANGE LOG
+ * $Archive: $
+ * $Revision:  $
+ * $Modtime:  $
+ * $History: $
+ * 
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,6 +67,9 @@ namespace WorkPackageApplication
     /// </summary>
     static class LocateClass
     {
+        /// <summary>
+        /// a form to display the status for  long queries.
+        /// </summary>
         public static StatusForm m_statusForm = new StatusForm();
         /// <summary>
         /// this is some code to parse through the persistant element path (PEP).  
@@ -75,9 +115,10 @@ namespace WorkPackageApplication
         /// </summary>
         /// <param name="pInst"></param>
         /// <returns>returns a COM element.</returns>
-        private static BCOM.Element ElementFinder(ECOI.IECInstance pInst)
+        private static BCOM.Element ElementFinder(ECOI.IECInstance pInst,ECSR.RepositoryConnection conn)
         {
-            ECSR.RepositoryConnection conn = WorkPackageAddin.OpenConnection();
+            if(null == conn)
+                conn = WorkPackageAddin.OpenConnection();
 
             //string instID = BDGNP.DgnECPersistence.CreateInstanceId(conn, (System.IntPtr)pElement.ModelReference.MdlModelRefP(), (ulong)pElement.ID, "");
             ulong filePos;
@@ -90,7 +131,7 @@ namespace WorkPackageApplication
             BCOM.Element el;
             el = oModel.GetElementByID((long)filePos);
 
-            WorkPackageAddin.CloseConnection(conn);
+            //WorkPackageAddin.CloseConnection(conn);
 
             return el;
         }
@@ -103,13 +144,13 @@ namespace WorkPackageApplication
         /// base 10 from hex.
         /// </summary>
         /// <param name="pInstance"></param>
-        public static TagItemSet FindHostElement(ECOI.IECInstance pInstance)
+        public static TagItemSet FindHostElement(ECOI.IECInstance pInstance, ECSR.RepositoryConnection conn)
         {
             TagItemSet tset = new TagItemSet();
 
             if (pInstance != null)
             {
-                BCOM.Element el = ElementFinder(pInstance);
+                BCOM.Element el = ElementFinder(pInstance,conn);
                 tset.modelID = el.ModelReference.MdlModelRefP();
                 tset.filePos = el.ID;
             }
@@ -153,7 +194,7 @@ namespace WorkPackageApplication
                 result.Dump(Console.Out, "debug:");
                 try
                 {
-                    FindHostElement(pInstance);
+                    FindHostElement(pInstance,conn);
                 }
                 catch (Bentley.ECObjects.ECObjectsException.PropertyNotFound e)
                 {
@@ -253,7 +294,7 @@ namespace WorkPackageApplication
                         val = iInstance.GetAsString(propName);
                         Debug.WriteLine(val);
                     }
-                    tset = FindHostElement(iInstance);
+                    tset = FindHostElement(iInstance,conn);
                    // LocateClass.TraverseRelationship(iInstance, conn);
                     tset.className = className;
                     if(value.Length>0)
@@ -442,7 +483,7 @@ namespace WorkPackageApplication
                     {
                         string val = iInstance.GetAsString("ISO_SHEET");
                         Debug.WriteLine(val);
-                        FindHostElement(iInstance);
+                        FindHostElement(iInstance,conn);
                         retValue = true;
                     }
                 }
@@ -528,7 +569,7 @@ namespace WorkPackageApplication
                 if (pResult.TryGetElement(i, out iInstance))
                 {
                     TagItemSet tset;
-                    tset = FindHostElement(iInstance);
+                    tset = FindHostElement(iInstance,conn);
                     if (tset.filePos > 0)
                         elList.Add(tset);
                 }
@@ -620,7 +661,7 @@ namespace WorkPackageApplication
                 if (pResult.TryGetElement(i, out iInstance))
                 {
                     TagItemSet tset;
-                    tset = FindHostElement(iInstance);
+                    tset = FindHostElement(iInstance,conn);
                     if (tset.filePos > 0)
                     {
                         //get the element.
@@ -632,7 +673,6 @@ namespace WorkPackageApplication
             if (pResult.Count == 0)
                 WorkPackageAddin.ComApp.MessageCenter.AddMessage("No Items found", "the query " + query.ToString(), BCOM.MsdMessageCenterPriority.Info, false);
 
-            //WorkPackageAddin.CloseConnection(conn);
             return el;
         }
     }

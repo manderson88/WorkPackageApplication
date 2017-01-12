@@ -8,8 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using System.Diagnostics;
-using WebSockets.Events;
-using WebSockets.Common;
+using WPWebSockets.Events;
+using WPWebSockets.Common;
+using WPWebSockets;
 
 namespace WorkPackageApplication
 {
@@ -53,8 +54,9 @@ namespace WorkPackageApplication
 
         private void m_worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            WebSockets.WebSocketLogger logger = new WebSockets.WebSocketLogger(msg);
-
+            WebSocketLogger logger = new WebSocketLogger(msg);
+            //WPWebSockets.WebSocketLogger logger = new WPWebSockets.WebSocketLogger(msg);
+           
             WSClientApp.TestClient(logger);
 
             e.Result = e.Argument;

@@ -19,6 +19,7 @@ namespace WorkPackageApplication
     class SelectForScopeCmd : BCOM.ILocateCommandEvents
     {
         public string m_targetGroupName{get;set;}
+        ECSR.RepositoryConnection m_connection;
         internal static void StartScopeCommand(BM.AddIn _addIn, string targetGroupName)
         {
             SelectForScopeCmd command = new SelectForScopeCmd();
@@ -32,20 +33,20 @@ namespace WorkPackageApplication
         {
             try
             {
-                ECSR.RepositoryConnection m_connection = WorkPackageAddin.OpenConnection();
+               
                 string clsName = "";
                 string prop = ItemSetUtilities.populateData(Element, out clsName, "GUID", m_connection);
                 string message = "[ {strElmID:" + prop + "} ]";
-                ItemSetUtilities.MoveItemBetweenLists(m_targetGroupName, "Available", prop, "GUID");
-                KeyinCommands.SendMessage(message);
-                WorkPackageAddin.CloseConnection(m_connection);
+                ItemSetUtilities.MoveItemBetweenLists(m_targetGroupName, "Available", prop, "GUID", m_connection);
+               // KeyinCommands.SendMessage(message);
+               
             }
             catch (Exception e) { WorkPackageAddin.ComApp.MessageCenter.AddMessage("error",e.Message, BCOM.MsdMessageCenterPriority.Error, false); }
         }
 
         public void Cleanup()
         {
-            
+            WorkPackageAddin.CloseConnection(m_connection);
         }
 
         public void Dynamics(ref BCOM.Point3d Point, BCOM.View View, BCOM.MsdDrawingMode DrawMode)
@@ -71,7 +72,7 @@ namespace WorkPackageApplication
         public void Start()
         {
             BCOM.LocateCriteria lc = WorkPackageAddin.ComApp.CommandState.CreateLocateCriteria(false);
-
+            m_connection = WorkPackageAddin.OpenConnection();
             WorkPackageAddin.ComApp.CommandState.SetLocateCriteria(lc);
             WorkPackageAddin.ComApp.ShowCommand("Send to Work Package");
             WorkPackageAddin.ComApp.ShowPrompt("Select Component");

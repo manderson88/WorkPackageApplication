@@ -382,9 +382,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="WebSockets\WebSockets.csproj">
-      <Project>{B16E6B81-18D6-4E72-8D02-7F6A368663B1}</Project>
-      <Name>WebSockets</Name>
+    <ProjectReference Include="WPWebSockets\WPWebSockets.csproj">
+      <Project>{d2dbcc1d-cef2-400b-a886-7e0d13a25f9c}</Project>
+      <Name>WPWebSockets</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

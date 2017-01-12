@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using WebSockets.Events;
-using WebSockets.Common;
+using WPWebSockets.Events;
+using WPWebSockets.Common;
 using System.Diagnostics;
 
 namespace WorkPackageApplication
 {
-    public class ChatWebSocketClient : WebSockets.Client.WebSocketClient
+    public class ChatWebSocketClient : WPWebSockets.Client.WebSocketClient
     {
-        public ChatWebSocketClient(bool noDelay, IWebSocketLogger logger)
-            : base(noDelay, logger)
+        public ChatWebSocketClient(bool noDelay, IWebSocketLogger logger,Int64 _UUID)
+            : base(noDelay, logger, _UUID)
         {
 
         }

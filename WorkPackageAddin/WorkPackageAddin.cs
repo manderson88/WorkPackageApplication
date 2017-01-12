@@ -64,6 +64,8 @@ internal sealed class WorkPackageAddin : Bentley.MicroStation.AddIn
 private static WorkPackageAddin           s_addin = null;
 private static BCOM.Application           s_comApp = null;
 private static ECApiExampleAddSchemaToElm pSchemaListForm;
+private static Boolean m_inWorkFile;
+
 /// <summary>Private constructor required for all AddIn classes derived from 
 /// Bentley.MicroStation.AddIn.</summary>
 private         WorkPackageAddin
@@ -83,13 +85,49 @@ System.String[] commandLine
 )
     {
     s_comApp = BMI.Utilities.ComApp;
-
+    //Debugger.Launch();
     //  Register reload and unload events, and show the form
     this.ReloadEvent += new ReloadEventHandler(WorkPackageAddin_ReloadEvent);
     this.UnloadedEvent += new UnloadedEventHandler(WorkPackageAddin_UnloadedEvent);
-
+    this.NewDesignFileEvent += new NewDesignFileEventHandler(WorkPackageAddin_NewFileEvent);
+    this.ReferenceAttachedEvent += new ReferenceAttachedEventHandler(WorkPackageAddin_ReferenceAttachedEvent);
+    this.ModelChangedEvent += new ModelChangedEventHandler(WorkPackageAddin_ModelChangedEventHandler);
     return 0;
     }
+private void WorkPackageAddin_ModelChangedEventHandler(Bentley.MicroStation.AddIn senderIn, ModelChangedEventArgs events)
+{
+    if (events.Change == ModelChangedEventArgs.ChangeType.Active)
+        ComApp.CadInputQueue.SendKeyin("wpaddin chat send model Opened");
+
+}
+private void WorkPackageAddin_ReferenceAttachedEvent(Bentley.MicroStation.AddIn senderIn, ReferenceAttachedEventArgs eventArgsIn)
+{
+   // Debugger.Launch();
+    if((int)eventArgsIn.Cause == 7)
+    {
+        WorkPackageAddin.ComApp.CadInputQueue.SendKeyin("wpaddin chat send wps>qget");
+        //KeyinCommands.SendMessage("WPS>QGET");//should be the JSON for the IWP elements//
+    }
+}
+private void WorkPackageAddin_NewFileEvent(Bentley.MicroStation.AddIn sender, NewDesignFileEventArgs args)
+{
+    if (args.WhenCode == NewDesignFileEventArgs.When.AfterDesignFileOpen)
+    {
+        //Debugger.Launch();
+        string shortName = Path.GetFileName(args.Name);
+        if ((!m_inWorkFile)&&(!shortName.StartsWith("_")))
+        {
+            WorkPackageAddin.ComApp.CadInputQueue.SendKeyin("wpaddin chat send WPS>QGET");
+            m_inWorkFile = true;
+            //KeyinCommands.SendMessage("WPS>QGET");//make this a work file.        
+        }
+    }
+    if (args.WhenCode == NewDesignFileEventArgs.When.BeforeDesignFileClose)
+    {
+        if (m_inWorkFile)
+            WorkPackageAddin.ComApp.CadInputQueue.SendKeyin("in work file " + args.Name);
+    }
+}
 
 /// <summary>Static property that the rest of the application uses 
 /// get the reference to the AddIn.</summary>

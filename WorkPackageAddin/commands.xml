@@ -31,6 +31,7 @@
           <Keyword CommandWord="FindInstOf"></Keyword>
           <Keyword CommandWord="FindSchemaFor"></Keyword>
           <Keyword CommandWord="Gather"></Keyword>
+          <Keyword CommandWord="Exit"></Keyword>
           <Keyword SubtableRef="WebSocket" CommandWord="Chat"><Options Required="true"/></Keyword>
           <Keyword SubtableRef="Build" CommandWord="ItemSet"><Options Required="true"/></Keyword>
         </KeyinTable>
@@ -48,6 +49,8 @@
         <Keyword CommandWord="New"></Keyword>
         <Keyword CommandWord="Move"></Keyword>
         <Keyword CommandWord="Close"></Keyword>
+        <Keyword CommandWord="AppID"></Keyword>
+        <Keyword CommandWord="dataFile"></Keyword>
       </KeyinTable>
       
       <KeyinTable ID="LocEle">
@@ -96,6 +99,9 @@
       <KeyinHandler Keyin="WPAddin ItemSet New" Function="WorkPackageApplication.KeyinCommands.NewList"/>
       <KeyinHandler Keyin="WPAddin ItemSet Move" Function="WorkPackageApplication.KeyinCommands.MoveBetweenGroups"/>
       <KeyinHandler Keyin="WPAddin ItemSet Close" Function="WorkPackageApplication.KeyinCommands.CloseConnection"/>
+      <KeyinHandler Keyin="WPAddin ItemSet AppId" Function="WorkPackageApplication.KeyinCommands.SetAppItemSetAppID"/>
+      <KeyinHandler Keyin="wpaddin ItemSet dataFile" Function="WorkPackageApplication.KeyinCommands.SetDataFile"/>
+      <KeyinHandler Keyin="WPAddin Exit" Function="WorkPackageApplication.KeyinCommands.ExitProcess"/>
     </KeyinHandlers>
 
 
