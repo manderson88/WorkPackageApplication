@@ -39,21 +39,9 @@ namespace WorkPackageApplication
         {
             
             var logger = new WPWebSockets.WebSocketLogger("test");
-
+            if(null==m_client)
             m_client =  new ChatWebSocketClient(true, logger,0);
-           // m_client += Client_TextFrame;
-
-            //m_client.OpenBlocking(m_uri);
-            //m_client.Send("test message");
-
-           // using (var client = new ChatWebSocketClient(false, logger))
-            {
-             //   if (null == m_client)
-             //       m_client = client;
-             //   else
-             //       client = m_client;
-
-                Uri uri = new Uri("ws://localhost:8880/WPS");
+//                Uri uri = new Uri("ws://localhost:8880/WPS");
                 m_client.TextFrame += Client_TextFrame;
                 m_client.ConnectionOpened += Client_ConnectionOpened;
                 m_client.TextMultiFrame += Client_MultiFrame;
@@ -62,17 +50,8 @@ namespace WorkPackageApplication
 
                 WebSocketLogger wsl = (WebSocketLogger)state;
                 m_message = wsl.m_message;
-                // test the open handshake
-                //try
-                {
-                    m_client.OpenBlocking(uri);
-                }
-                //catch (Exception e) { Debug.Print(e.Message); }
-                //m_client.Send(wsl.m_message);
-
-                //m_client = client;
-            }
-
+                m_client.OpenBlocking(m_uri);
+                m_client.Send(m_message);
         }
 
         private static void Client_ping(object sender, EventArgs e)
@@ -91,6 +70,7 @@ namespace WorkPackageApplication
                 m_message = " ";
 
             m_client.Send(m_message);
+           // m_client.SendClose();
             //m_client.Dispose();
         }
 

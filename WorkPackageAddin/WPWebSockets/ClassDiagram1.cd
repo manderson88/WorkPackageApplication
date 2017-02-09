@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="WPWebSockets.Client.WebSocketClient">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAACAAEAQAAAAAIAAAIKCAAAAAAAQAEIAAABA=</HashCode>
+      <FileName>Client\WebSocketClient.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WPWebSockets.Common.BinaryReaderWriter">
+    <Position X="6" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgCAAAAAAAAAAAAAgAAAABCBAAAAAAAI=</HashCode>
+      <FileName>Common\BinaryReaderWriter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.Common.WebSocketBase" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUQABACAEBAiAACAEAAUAACaACwIAABAAAAcoAAEpA=</HashCode>
+      <FileName>Common\WebSocketBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.Common.WebSocketFrame">
+    <Position X="11.75" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAgAgAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Common\WebSocketFrame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.Common.WebSocketFrameReader">
+    <Position X="4" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAgAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\WebSocketFrameReader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.Common.WebSocketFrameWriter">
+    <Position X="13.75" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAEAABQ=</HashCode>
+      <FileName>Common\WebSocketFrameWriter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.Events.BinaryFrameEventArgs" Collapsed="true">
+    <Position X="3" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Events\BinaryFrameEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.Events.BinaryMultiFrameEventArgs" Collapsed="true">
+    <Position X="3" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Events\BinaryMultiFrameEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.Events.ConnectionCloseEventArgs" Collapsed="true">
+    <Position X="6.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Events\ConnectionCloseEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.Events.JSONFrameEventArgs" Collapsed="true">
+    <Position X="5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Events\JSONFrameEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.Events.JSONMultiFrameEventArgs" Collapsed="true">
+    <Position X="5" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Events\JSONMultiFrameEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.Events.PingEventArgs" Collapsed="true">
+    <Position X="10.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Events\PingEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.Events.PongEventArgs" Collapsed="true">
+    <Position X="8.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Events\PongEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.Events.TextFrameEventArgs" Collapsed="true">
+    <Position X="0.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Events\TextFrameEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.Events.TextMultiFrameEventArgs" Collapsed="true">
+    <Position X="0.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Events\TextMultiFrameEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.Exceptions.EntityTooLargeException" Collapsed="true">
+    <Position X="18" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\EntityTooLargeException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.Exceptions.ServerListenerSocketException" Collapsed="true">
+    <Position X="19.75" Y="8.5" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\ServerListenerSocketException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.Exceptions.WebSocketHandshakeFailedException" Collapsed="true">
+    <Position X="16.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\WebSocketHandshakeFailedException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.Exceptions.WebSocketVersionNotSupportedException" Collapsed="true">
+    <Position X="21.25" Y="8.5" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\WebSocketVersionNotSupportedException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.Server.ConnectionDetails">
+    <Position X="16.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAIAAAAAIAAAAAAAAIAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Server\ConnectionDetails.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WPWebSockets.Server.Http.BadRequestService" BaseTypeListCollapsed="true">
+    <Position X="8" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAEAAAAAAAAAAIAAAAAAAAAAAAABAABA=</HashCode>
+      <FileName>Server\Http\BadRequestService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WPWebSockets.Server.Http.HttpHelper">
+    <Position X="18" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Server\Http\HttpHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.Server.Http.HttpService" BaseTypeListCollapsed="true">
+    <Position X="10" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACACAAAACAAAAABAIIAAAAAIAAAAQgDAABA=</HashCode>
+      <FileName>Server\Http\HttpService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WPWebSockets.Server.Http.MimeTypes" Collapsed="true">
+    <Position X="22.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Server\Http\MimeTypes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.Server.Http.MimeTypesFactory">
+    <Position X="19.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Server\Http\MimeTypesFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WPWebSockets.WebServer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAACCACgEAAAAAAICCAIAAAAAAAAAQAAgAACAA=</HashCode>
+      <FileName>Server\WebServer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WPWebSockets.Server.WebSocket.WebSocketService">
+    <Position X="2.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACCAAEAAAAAAABCAIACAAAAAAAQAAIBAABA=</HashCode>
+      <FileName>Server\WebSocket\WebSocketService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Exception" Collapsed="true">
+    <Position X="18.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.EventArgs" Collapsed="true">
+    <Position X="5.5" Y="8" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Collections.Generic.Dictionary&lt;TKey, TValue&gt;" Collapsed="true">
+    <Position X="22.25" Y="2" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="WPWebSockets.Common.IWebSocketLogger">
+    <Position X="12.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAQAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\IWebSocketLogger.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WPWebSockets.Server.IService">
+    <Position X="8.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Interfaces\IService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WPWebSockets.Server.IServiceFactory">
+    <Position X="10.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IServiceFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WPWebSockets.Server.IConnectionDetails">
+    <Position X="7" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IConnectionDetails.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="WPWebSockets.Common.WebSocketCloseCode" Collapsed="true">
+    <Position X="16.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEACAAEIAAAAAQQAAEAACIAAAAAAAAAEACABA=</HashCode>
+      <FileName>Common\WebSocketCloseCode.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="WPWebSockets.Common.WebSocketOpCode" Collapsed="true">
+    <Position X="18" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAADAiAAAAEAAAAAAAAAwAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\WebSocketOpCode.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="WPWebSockets.Server.ConnectionType" Collapsed="true">
+    <Position X="14.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAABAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Server\ConnectionType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

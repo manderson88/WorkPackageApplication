@@ -37,7 +37,7 @@ namespace WorkPackageApplication
                 string clsName = "";
                 string prop = ItemSetUtilities.populateData(Element, out clsName, "GUID", m_connection);
                 string message = "[ {strElmID:" + prop + "} ]";
-                ItemSetUtilities.MoveItemBetweenLists(m_targetGroupName, "Available", prop, "GUID", m_connection);
+                ItemSetUtilities.MoveItemBetweenLists(m_targetGroupName, "Available-" + ItemSetUtilities.s_appID, prop, "GUID", m_connection);
                // KeyinCommands.SendMessage(message);
                
             }

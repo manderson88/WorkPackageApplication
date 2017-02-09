@@ -59,6 +59,7 @@ using System.Threading;
 using WPWebSockets.Common;
 using WPWebSockets;
 using System.Text;
+using System.Collections.Generic;
 
 namespace WorkPackageApplication
 {
@@ -67,6 +68,7 @@ namespace WorkPackageApplication
 /// </summary>
 internal class KeyinCommands
 {
+    private static double interCount = 0.0;
     /// <summary>
     /// a command that will dump out the ecschema in the model.  
     /// if there is an unparsed arg it will be
@@ -320,8 +322,8 @@ internal class KeyinCommands
                 BCOM.MsdMessageCenterPriority.Error, true);
             return;
         }
-
-        WorkPackageAddin.ComApp.CadInputQueue.SendKeyin("itemset create " + unparsed);
+        string targetName = unparsed+"-"+ItemSetUtilities.s_appID;
+        WorkPackageAddin.ComApp.CadInputQueue.SendKeyin("itemset create " + targetName);
         bool bHasData = false;
         //loop through the selection and add to the target group.
         ECSR.RepositoryConnection m_connection = WorkPackageAddin.OpenConnection();
@@ -331,13 +333,16 @@ internal class KeyinCommands
             bHasData = true;
             
             BCOM.ElementEnumerator ee = WorkPackageAddin.ComApp.ActiveDesignFile.Fence.GetContents(false,true);
+            ItemSetUtilities.BuildIWP(ee);
+            /*
             while (ee.MoveNext())
             {
                 string clsName = "";
                 string prop = ItemSetUtilities.populateData(ee.Current, out clsName, "GUID", m_connection);
-                ItemSetUtilities.MoveItemBetweenLists(unparsed, "Available", prop, "GUID", m_connection);
+                ItemSetUtilities.MoveItemBetweenLists(targetName, "Available-" + ItemSetUtilities.s_appID, prop, "GUID", m_connection);
                 //KeyinCommands.SendMessage("moved element " + prop + " to " + unparsed);
             }
+            */ 
         }
 
         if (WorkPackageAddin.ComApp.ActiveModelReference.AnyElementsSelected)
@@ -345,18 +350,22 @@ internal class KeyinCommands
             bHasData = true;
 
             BCOM.ElementEnumerator ee = WorkPackageAddin.ComApp.ActiveModelReference.GetSelectedElements();
+
+            ItemSetUtilities.BuildIWP(ee);
+            /*
             while (ee.MoveNext())
             {
                 string clsName = "";
                 string prop = ItemSetUtilities.populateData(ee.Current, out clsName, "GUID", m_connection);
-               
-                ItemSetUtilities.MoveItemBetweenLists(unparsed, "Available", prop, "GUID", m_connection);
+
+                ItemSetUtilities.MoveItemBetweenLists(targetName, "Available-" + ItemSetUtilities.s_appID, prop, "GUID", m_connection);
                 //KeyinCommands.SendMessage("moved element " + prop + " to " + unparsed);
             }
+            */
         }
 
         if (!bHasData)
-            SelectForScopeCmd.StartScopeCommand(WorkPackageAddin.MyAddin,unparsed);
+            SelectForScopeCmd.StartScopeCommand(WorkPackageAddin.MyAddin, targetName);
         else
             WorkPackageAddin.CloseConnection(m_connection);
     }
@@ -379,14 +388,46 @@ internal class KeyinCommands
     {
         ItemSetUtilities._AttachToWorkingModel(unparsed);
     }
+    public static void SetItemSetCount (string unparsed)
+    {
+        ItemSetUtilities.s_itemsCount = Int32.Parse(unparsed);
+    }
     /// <summary>
     /// set the application / page identifer this is used when sending the JSON  
     /// is sent back to the application.
     /// </summary>
     /// <param name="appID"></param>
-    public static void SetAppItemSetAppID (string appID)
+    public static void SetAppItemSetAppID (string unparsed)
     {
-        ItemSetUtilities.s_appID = appID;
+        string[] args = unparsed.Split(':');
+        if (args.Length > 1)
+        {
+            string appID = args[1];
+            string source = args[0];
+            bool empty = false;
+
+            interCount = 0;
+            if (0 == source.CompareTo("TABCHNG"))
+            {
+                BCOM.NamedGroupElement nge;
+                try
+                {
+                    nge = WorkPackageAddin.ComApp.ActiveModelReference.GetNamedGroup("Available-" + appID);
+                    if (nge.MembersCount == 0)
+                    {
+                        WorkPackageAddin.ComApp.MessageCenter.AddMessage("no elements selected", "No elements are in the available group", BCOM.MsdMessageCenterPriority.Info, false);
+                        empty = true;
+                    }
+                }
+                catch (Exception e) { Debug.Print("there is no named group to match the appid " + ItemSetUtilities.s_appID); }
+                if (!empty)
+                    ItemSetUtilities.s_appID = appID;
+            }
+            else
+            {
+                ItemSetUtilities.s_appID = appID;
+            }
+        }
     }
     /// <summary>
     /// sets the JSON data file header information.
@@ -396,13 +437,35 @@ internal class KeyinCommands
     /// <param name="dataString">ProjID:appUUID:dsName:docGUID:fileName</param>
     public static void SetDataFile(string dataString)
     {
-        string[] args = dataString.Split(':');
+        //if it is a different id then we are changing pages
+       // if (appID != ItemSetUtilities.s_appID)
+            WorkPackageAddin.openCompletionBarDialog("importing " + ItemSetUtilities.s_itemsCount + " items");
 
-        ItemSetUtilities.s_projID = args[0];
-        ItemSetUtilities.s_appUUID = args[1];
-        ItemSetUtilities.s_dsName = args[2];
-        ItemSetUtilities.s_docGUID = args[3];
-        ItemSetUtilities.s_fileName = args[4];
+        string[] args = dataString.Split(':');
+        if (args[0].Length > 0)
+            ItemSetUtilities.s_projID = args[0];
+        else 
+            ItemSetUtilities.s_projID = " ";
+
+        if (args[1].Length > 0)
+            ItemSetUtilities.s_appUUID = args[1];
+        else
+            ItemSetUtilities.s_appID = " ";
+
+        if (args[2].Length > 0)
+            ItemSetUtilities.s_dsName = args[2];
+        else
+            ItemSetUtilities.s_dsName = " ";
+
+        if (args[3].Length > 0)
+            ItemSetUtilities.s_docGUID = args[3];
+        else
+            ItemSetUtilities.s_docGUID = " ";
+
+        if (args[4].Length > 0)
+            ItemSetUtilities.s_fileName = args[4];
+        else
+            ItemSetUtilities.s_fileName = " ";
 
     }
     /// <summary>
@@ -413,9 +476,17 @@ internal class KeyinCommands
     /// TagID:GUID:xxx:SchemaName</param>
     public static void AddElementToItemSet(string schemNameElGUID)
     {
+        //update the UI.
+        double percentComplete = 100 * (interCount/ItemSetUtilities.s_itemsCount);
+        interCount++;
+        WorkPackageAddin.updateCompletionBar("adding items " + interCount + " of " + Convert.ToInt32( ItemSetUtilities.s_itemsCount) , Convert.ToInt32(percentComplete));
+
         string[] args = schemNameElGUID.Split(':');
-        ItemSetUtilities.AddItemToSetByID(args[0], args[1],args[2],args[3]);
-        ItemSetUtilities.AddToParentGroup(args[0],"Available");
+        ItemSetUtilities.PopulateItemSet(args[0], args[1], args[2], args[3]);
+    }
+    public static void OpenConn (string unparsed)
+    {
+
     }
     /// <summary>
     /// close the ec repository connection from a remote client.
@@ -455,7 +526,7 @@ internal class KeyinCommands
     public static void GetElementsInItemSet(string unparsed)
     {
         string[] args = unparsed.Split(':');
-        string name = args[0];
+        string name = args[0]+"-"+ItemSetUtilities.s_appID;
         string propKey = args[1];
 
         ItemSetUtilities.SendItemListElements(name,propKey);
@@ -464,7 +535,7 @@ internal class KeyinCommands
     /// dead old code that is not being called 
     /// </summary>
     /// <param name="unparsed"></param>
-    public static void NewList(string unparsed)
+  /*  public static void NewList(string unparsed)
     {
         ItemSetUtilities.AddToList("", true);
     }
@@ -476,7 +547,7 @@ internal class KeyinCommands
     public static void ProcessList(string unparsed)
     {
         ItemSetUtilities.PopulateWPlist(unparsed);
-    }
+    }*/
     /// <summary>
     /// send the exit command to the socket.  This makes things cleaner by letting
     /// the socket clean up its reference to the com server.
@@ -485,6 +556,32 @@ internal class KeyinCommands
     public static void ExitProcess(string  unparsed)
     {
         WorkPackageAddin.ComApp.CadInputQueue.SendKeyin("wpaddin chat send wps>exit");
+    }
+    public static void FindAllItem(string unparsed)
+    {
+        List<LocationInformation> locations;
+        locations = LocateClass.FindSingleItem(unparsed);
+        LocationInformationFrm lform = new LocationInformationFrm(WorkPackageApplication.WorkPackageAddin.MyAddin, locations);
+        lform.Show();
+    }
+    public static void IsolateAvailable(string unparsed)
+    {
+        string groupName = "Available-" + ItemSetUtilities.s_appID;
+        WorkPackageApplication.WorkPackageAddin.ComApp.CadInputQueue.SendKeyin("displayset set group childgroups " + groupName);
+    }
+    public static void IsolateIWP(string unparsed)
+    {
+        string groupName = "IWP-" + ItemSetUtilities.s_appID;
+        WorkPackageAddin.ComApp.CadInputQueue.SendKeyin("displayset set group childgroups " + groupName);
+    }
+    public static void runlistcmd(string unparsed)
+    {
+        WorkPackageAddin.closeCompletionBar();
+        ItemSetUtilities.RunList(unparsed);
+    }
+    public static void IsolateClearIWP(string unparsed)
+    {
+        WorkPackageAddin.ComApp.CadInputQueue.SendKeyin("namedgroup delete IWP-" + ItemSetUtilities.s_appID);
     }
 }  // End of KeyinCommands
 

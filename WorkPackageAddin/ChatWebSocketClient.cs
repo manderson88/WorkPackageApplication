@@ -15,7 +15,11 @@ namespace WorkPackageApplication
         {
 
         }
-
+        public void SendClose()
+        {
+            byte[] buffer = Encoding.UTF8.GetBytes("Client Close");
+            base.Send(WebSocketOpCode.ConnectionClose, buffer);
+        }
         public override void Send(string text)
         {
             if (text != null)

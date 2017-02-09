@@ -60,6 +60,36 @@ internal sealed class WorkPackageAddin : Bentley.MicroStation.AddIn
         CallingConvention = SRI.CallingConvention.Cdecl)]
     internal static extern void matCreate_createMaterial(
         string materialName);
+    /// <summary>
+    /// wrap up the completion bar api.  the open method to start the dialog.
+    /// </summary>
+    /// <param name="message"></param>
+    [SRI.DllImport("WPAHelper.dll", EntryPoint = "openCompletionBar",
+        CharSet = SRI.CharSet.Ansi,
+        CallingConvention = SRI.CallingConvention.Cdecl)]
+    internal static extern void openCompletionBar(string message);
+    /// <summary>
+    /// update call to update the completion bar.
+    /// </summary>
+    /// <param name="message">text to print</param>
+    /// <param name="percent">to show how complete.</param>
+    [SRI.DllImport("WPAHelper.dll", EntryPoint = "updateCompletionBar",
+        CharSet = SRI.CharSet.Ansi,
+        CallingConvention = SRI.CallingConvention.Cdecl)]
+    internal static extern void updateCompletionBar(string message, int percent);
+    /// <summary>
+    /// close the completion bar.
+    /// </summary>
+    [SRI.DllImport("WPAHelper.dll", EntryPoint = "closeCompletionBar",
+        CharSet = SRI.CharSet.Ansi,
+        CallingConvention = SRI.CallingConvention.Cdecl)]
+    internal static extern void closeCompletionBar();
+
+    [SRI.DllImport("WPAHelper.dll", EntryPoint = "openCompletionBarDialog",
+        CharSet = SRI.CharSet.Ansi,
+        CallingConvention = SRI.CallingConvention.Cdecl)]
+    internal static extern void openCompletionBarDialog(string message);
+
 
 private static WorkPackageAddin           s_addin = null;
 private static BCOM.Application           s_comApp = null;
@@ -94,12 +124,30 @@ System.String[] commandLine
     this.ModelChangedEvent += new ModelChangedEventHandler(WorkPackageAddin_ModelChangedEventHandler);
     return 0;
     }
+    /// <summary>
+    /// handle when the model changes so we can queue up the open message.
+    /// </summary>
+    /// <param name="senderIn"></param>
+    /// <param name="events"></param>
 private void WorkPackageAddin_ModelChangedEventHandler(Bentley.MicroStation.AddIn senderIn, ModelChangedEventArgs events)
 {
     if (events.Change == ModelChangedEventArgs.ChangeType.Active)
-        ComApp.CadInputQueue.SendKeyin("wpaddin chat send model Opened");
+    {
+        ComApp.CadInputQueue.SendKeyin("wpaddin chat send model Opened " + WorkPackageAddin.ComApp.ActiveDesignFile.Name);
+       
+       /* if(WorkPackageAddin.ComApp.ActiveDesignFile.Name.StartsWith("_"))
+        {
+            WorkPackageAddin.ComApp.CadInputQueue.SendKeyin("wpaddin itemset runlist");
+        }*/
+    }
 
 }
+    /// <summary>
+    /// handle the reference file attachment.  since we attach the PMM as an attachment
+    /// we do some things based on the completion.
+    /// </summary>
+    /// <param name="senderIn"></param>
+    /// <param name="eventArgsIn"></param>
 private void WorkPackageAddin_ReferenceAttachedEvent(Bentley.MicroStation.AddIn senderIn, ReferenceAttachedEventArgs eventArgsIn)
 {
    // Debugger.Launch();
@@ -109,6 +157,11 @@ private void WorkPackageAddin_ReferenceAttachedEvent(Bentley.MicroStation.AddIn 
         //KeyinCommands.SendMessage("WPS>QGET");//should be the JSON for the IWP elements//
     }
 }
+    /// <summary>
+    /// called when a new file opens.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
 private void WorkPackageAddin_NewFileEvent(Bentley.MicroStation.AddIn sender, NewDesignFileEventArgs args)
 {
     if (args.WhenCode == NewDesignFileEventArgs.When.AfterDesignFileOpen)
@@ -118,14 +171,23 @@ private void WorkPackageAddin_NewFileEvent(Bentley.MicroStation.AddIn sender, Ne
         if ((!m_inWorkFile)&&(!shortName.StartsWith("_")))
         {
             WorkPackageAddin.ComApp.CadInputQueue.SendKeyin("wpaddin chat send WPS>QGET");
+            Debug.Print("in file " + WorkPackageAddin.ComApp.ActiveDesignFile.Name);
             m_inWorkFile = true;
-            //KeyinCommands.SendMessage("WPS>QGET");//make this a work file.        
+             //KeyinCommands.SendMessage("WPS>QGET");//make this a work file.        
         }
+       // if ((shortName.StartsWith("_")) && (m_inWorkFile))
+       
     }
     if (args.WhenCode == NewDesignFileEventArgs.When.BeforeDesignFileClose)
     {
+     
+        WorkPackageAddin.CloseConnection(ItemSetUtilities.conn);
+        ItemSetUtilities.conn = null;
         if (m_inWorkFile)
             WorkPackageAddin.ComApp.CadInputQueue.SendKeyin("in work file " + args.Name);
+        if(m_inWorkFile)
+            m_inWorkFile = false;
+        
     }
 }
 
@@ -163,20 +225,32 @@ protected override void OnUnloading(UnloadingEventArgs eventArgs)
 /// <summary>Closes a connection. Always close the connection before opening a new file.</summary>
 public static void CloseConnection(ECSR.RepositoryConnection connection)
 {
-    ECSR.RepositoryConnectionService repositoryConnectionService = ECSR.RepositoryConnectionServiceFactory.GetService();
-    //Bentley.Collections.IExtendedParameters params;
-    repositoryConnectionService.Close(connection, null);
+    try
+    {
+        ECSR.RepositoryConnectionService repositoryConnectionService = ECSR.RepositoryConnectionServiceFactory.GetService();
+        //Bentley.Collections.IExtendedParameters params;
+        repositoryConnectionService.Close(connection, null);
+    }
+    catch (Exception e) { Console.WriteLine("closing connection exception" + e.Message); }
+    connection = null;
 }
 
 /// <summary> Open a connection to a repository </summary>
 public static ECSR.RepositoryConnection OpenConnection()
 {
+    ECSR.RepositoryConnection connection = null;
     ECSS.ECSession ecSession = ECSS.SessionManager.CreateSession(); // the ECSession provides context for most ECService calls.
 
-    ECSR.RepositoryConnection connection = OpenConnectionToActiveModel(ecSession);
+    if (null != WorkPackageAddin.ComApp.ActiveModelReference)
+       connection = OpenConnectionToActiveModel(ecSession);
 
     return connection;
 }
+    /// <summary>
+    /// gets all the classes in the model.
+    /// </summary>
+    /// <param name="pSchema"></param>
+    /// <returns></returns>
 public static string[] GetAllClassNamesInSchema(ECOS.IECSchema pSchema)
 {
     ECOS.IECClass[] pClasses = pSchema.GetClasses();
@@ -204,7 +278,10 @@ public static ECApiExampleAddSchemaToElm GetForm()
 {
     return pSchemaListForm;
 }
-    //sets the active form.  this is used to set the form reference to null when disposed.
+/// <summary>
+/// sets the active form.  this is used to set the form reference to null when disposed.
+/// </summary>
+/// <param name="pForm"></param>
 public static void SetForm(ECApiExampleAddSchemaToElm pForm)
 {
     pSchemaListForm = pForm;
@@ -231,8 +308,10 @@ public static bool ReportEbededSchema(ECSR.RepositoryConnection connection)
     return retStatus;
 }
 /// <summary>
-/// In this example, this method isn't really accomplishing other than demonstrate how we can discover which ECSchemas are available
+/// In this example, this method isn't really accomplishing other than 
+/// demonstrate how we can discover which ECSchemas are available
 /// </summary>
+/// <param name="connection"></param>
 public static void DiscoverWhichECSchemasAreAvailableInTheCurrentConnection
 (
 ECSR.RepositoryConnection connection
@@ -267,6 +346,11 @@ ECSR.RepositoryConnection connection
     }
     pSchemaListForm.Show();
 }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="classInst"></param>
+    /// <returns></returns>
 private static string[] GetPropertyNames(ECOS.IECClass classInst)
 {
    
@@ -284,7 +368,13 @@ private static string[] GetPropertyNames(ECOS.IECClass classInst)
         names[i++] = props.Current.Name;
     return names;
 }
-
+/// <summary>
+/// 
+/// </summary>
+/// <param name="schemaName"></param>
+/// <param name="className"></param>
+/// <param name="conn"></param>
+/// <returns></returns>
 public static Boolean FindSchemaForClassName(ref string schemaName, string className, ECSR.RepositoryConnection conn)
 {
     ECP.PersistenceService persistenceService = ECP.PersistenceServiceFactory.GetService();
@@ -319,23 +409,50 @@ public static Boolean FindSchemaForClassName(ref string schemaName, string class
         }
         return retstatus;
 }
-
 /// <summary>
 /// This method assumes that this AddIn is configured so that a particular example ECSchema is always configured...
 /// In general, you may need to use a technique like that of DiscoverWhichECSchemasAreAvailableInTheCurrentConnection
 /// to find an ECSchema, or use persistenceService.ImportSchema to import a particular ECSchema
 /// </summary>
+/// <param name="connection"></param>
+/// <param name="schemaToFind"></param>
+/// <returns></returns>
 public static ECOS.IECSchema LocateExampleSchema(ECSR.RepositoryConnection connection, string schemaToFind)
 {
-    ECP.PersistenceService persistenceService = ECP.PersistenceServiceFactory.GetService();
-    object contextForSchemaLocate = persistenceService.GetSchemaContext(connection);
-    ECOS.IECSchema schema = ECO.ECObjects.LocateSchema(schemaToFind, ECOS.SchemaMatchType.LatestCompatible, null, contextForSchemaLocate);
-    //ECO.ECObjects.LocateSchema(schemaToFind, 1, 0, ECOS.SchemaMatchType.LatestCompatible, null, contextForSchemaLocate);
-    Debug.Assert(null != schema);
+    ECOS.IECSchema schema = null;
 
+    if (!connection.Session.IsValid)
+        connection = OpenConnection();
+
+    try
+    {
+        ECP.PersistenceService persistenceService = ECP.PersistenceServiceFactory.GetService();
+        object contextForSchemaLocate = persistenceService.GetSchemaContext(connection);
+        schema = ECO.ECObjects.LocateSchema(schemaToFind, ECOS.SchemaMatchType.LatestCompatible, null, contextForSchemaLocate);
+        //ECO.ECObjects.LocateSchema(schemaToFind, 1, 0, ECOS.SchemaMatchType.LatestCompatible, null, contextForSchemaLocate);
+        //Debug.Assert(null != schema);
+    }
+    catch (Exception e) 
+    {
+        Console.WriteLine("Exception in Locate Schema" + e.Message);
+        try
+        {
+           // Debugger.Launch();
+            connection = WorkPackageAddin.OpenConnection();
+            ECP.PersistenceService persistenceService = ECP.PersistenceServiceFactory.GetService();
+            object contextForSchemaLocate = persistenceService.GetSchemaContext(connection);
+            schema = ECO.ECObjects.LocateSchema(schemaToFind, ECOS.SchemaMatchType.LatestCompatible, null, contextForSchemaLocate);
+        }
+        catch (Exception ee) { Console.WriteLine("inner try on the schema find." + ee.Message); }
+    }
     return schema;
 }
-
+/// <summary>
+/// 
+/// </summary>
+/// <param name="connection"></param>
+/// <param name="schemaToTry"></param>
+/// <returns></returns>
 public static ECOS.IECSchema LocateSchemaForWPS(ECSR.RepositoryConnection connection, string schemaToTry)
 {
     ECP.PersistenceService persistenceService = ECP.PersistenceServiceFactory.GetService();
@@ -418,6 +535,14 @@ public static ECOI.IECInstance CreateECInstance(string schema, string clsName, E
     }
     return pInstance;
 }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="schema"></param>
+    /// <param name="clsName"></param>
+    /// <param name="numRelations"></param>
+    /// <param name="connection"></param>
+    /// <returns></returns>
 public static ECOI.IECRelationshipInstance CreateRelationshipECInstance (string schema,string clsName,int numRelations, ECSR.RepositoryConnection connection)
 {
     ECOI.IECRelationshipInstance pInstance = null;
@@ -448,25 +573,47 @@ public static ECOI.IECRelationshipInstance CreateRelationshipECInstance (string 
     }
     return p;
 }
-/// <summary>Gets a connection to the active DGN Model</summary>
+/// <summary>
+/// Gets a connection to the active DGN Model
+/// </summary>
+/// <param name="ecSession"></param>
+/// <returns></returns>
 public static ECSR.RepositoryConnection OpenConnectionToActiveModel(ECSS.ECSession ecSession)
 {
     ECSR.RepositoryConnectionService repositoryConnectionService = ECSR.RepositoryConnectionServiceFactory.GetService();
-
+    ECSR.RepositoryConnection connection=null;
     string fileName = ""; // implies active file
     string modelName = ""; // implies active model
     //string loc;
     string location = BECPC.ECRepositoryConnectionHelper.BuildLocation(fileName, modelName);
 
     string ecPluginId = BDGNP.Constants.PluginID;
-
+    Debug.WriteLine("trying active model");
     Debug.WriteLine("location = " + location);
     Debug.WriteLine("PluginID = " + ecPluginId);
-
-    ECSR.RepositoryConnection connection = repositoryConnectionService.Open(ecSession, ecPluginId, location, null, null);
-
+    try
+    {
+        connection = repositoryConnectionService.Open(ecSession, ecPluginId, location, null, null);
+    }
+    catch (Exception connectionEx) { Console.WriteLine("error connecting " + connectionEx.Message); }
     Debug.Assert(null != connection);
 
+    return connection;
+}
+/// <summary>
+/// opena a connection to a specific model
+/// </summary>
+/// <param name="modelName"></param>
+/// <param name="fileName"></param>
+/// <param name="session"></param>
+/// <returns></returns>
+    public static ECSR.RepositoryConnection OpenConnectionToSourceModel(string modelName, string fileName, ECSS.ECSession session)
+{
+    ECSR.RepositoryConnectionService repositoryConnService = ECSR.RepositoryConnectionServiceFactory.GetService();
+
+    string location = BECPC.ECRepositoryConnectionHelper.BuildLocation(fileName, modelName);
+    string ecPluginID = BDGNP.Constants.PluginID;
+    ECSR.RepositoryConnection connection = repositoryConnService.Open(session, ecPluginID, location, null, null);
     return connection;
 }
 /// <summary>
@@ -567,12 +714,6 @@ public void ShowException(Exception e)
     else
         MessageBox.Show(message, "An exception occured during the example.");
 }
-
-//public List<ElementPacket> BuildJSONFromString(string message)
-//{
-//   return List<ElementPacket> elements = JNS.JsonConvert.DeserializeObject<List<ElementPacket>>(message);
-//}
-
 }   // End of WorkPackageAddin
 
 class ElementPacket

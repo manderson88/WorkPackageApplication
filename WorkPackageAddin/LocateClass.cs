@@ -79,13 +79,6 @@ namespace WorkPackageApplication
         private static string[] ParsePEPath(string pepString)
         {
             string[] pep;
-            //if the  string is only 10 chars then rip the first two chars off and return
-            //if (pepString.Length == 10)
-            //{
-            //    pep = new string[1];
-            //    pep[0] = (pepString.Substring(2, 8));
-            //}
-
             //length -2 mod 8?
             int count = pepString.Length/8;
             pep = new string[count];
@@ -117,21 +110,35 @@ namespace WorkPackageApplication
         /// <returns>returns a COM element.</returns>
         private static BCOM.Element ElementFinder(ECOI.IECInstance pInst,ECSR.RepositoryConnection conn)
         {
-            if(null == conn)
+            bool bUsinglocalConnection = false;
+
+            if (null == conn)
+            {
                 conn = WorkPackageAddin.OpenConnection();
-
+                bUsinglocalConnection = true;
+            }
             //string instID = BDGNP.DgnECPersistence.CreateInstanceId(conn, (System.IntPtr)pElement.ModelReference.MdlModelRefP(), (ulong)pElement.ID, "");
-            ulong filePos;
-            System.IntPtr elPtr;
+            ulong filePos=0;
+            System.IntPtr elPtr=System.IntPtr.Zero;
             string localKey = "";
-
-            BDGNP.DgnECPersistence.TryGetElementInfo(conn, pInst.InstanceId, out elPtr, out filePos, out localKey);
+            try
+            {
+                BDGNP.DgnECPersistence.TryGetElementInfo(conn, pInst.InstanceId, out elPtr, out filePos, out localKey);
+            }
+            catch (Exception e) 
+            {
+                WorkPackageAddin.ComApp.MessageCenter.AddMessage
+                ("error getting element info", 
+                "error calling try get element info" + e.Message, 
+                BCOM.MsdMessageCenterPriority.Error, false); 
+            }
 
             BCOM.ModelReference oModel = WorkPackageAddin.ComApp.MdlGetModelReferenceFromModelRefP((int)elPtr);
             BCOM.Element el;
             el = oModel.GetElementByID((long)filePos);
 
-            //WorkPackageAddin.CloseConnection(conn);
+            if(bUsinglocalConnection)
+                WorkPackageAddin.CloseConnection(conn);
 
             return el;
         }
@@ -389,17 +396,9 @@ namespace WorkPackageApplication
                // default:
                //     usesLike = ECPQ.RelationalOperator.EQ;
             }
-            //if (namedProperty != null)
-            //{
-              //  if (useLike)
-                //    usesLike = ECPQ.RelationalOperator.LIKE;
-                //if (searchValue.CompareTo("*") == 0)
-                   // query.r
-                    //usesLike = ECPQ.RelationalOperator.ISNOTNULL;
 
-                ECPQ.QueryHelper.WherePropertyExpressions(query, namedProperty, usesLike, searchValue);
-            //}
-                int maxDepth = 2;
+            ECPQ.QueryHelper.WherePropertyExpressions(query, namedProperty, usesLike, searchValue);
+            int maxDepth = 2;
             query.SelectClause.SelectAllProperties = true;
             query.SelectClause.SelectDistinctValues = true;
             ECPQ.QueryHelper.SetPolymorphic(query, true);
@@ -492,6 +491,71 @@ namespace WorkPackageApplication
             return retValue;
         }
         /// <summary>
+        /// used to find the instances and specific information for debugging
+        /// </summary>
+        /// <param name="className"></param>
+        /// <returns>list of elements andlocation values.</returns>
+        public static List<LocationInformation> FindSingleItem(string className)
+        {
+            List<LocationInformation> infoList = null;
+            ECOS.IECSchema pSchema = null;
+            ECSR.RepositoryConnection conn = WorkPackageAddin.OpenConnection();
+            pSchema = WorkPackageAddin.LocateExampleSchema(conn, "OpenPlant_3D.01.06");
+            System.Collections.IEnumerator classesInSchema = WorkPackageAddin.GetClassesInSchema(pSchema);
+            ECOS.IECClass pClass;
+            pClass = pSchema[className];
+            ECPQ.ECQuery query = ECPQ.QueryHelper.CreateQuery(pSchema, pClass.Name);
+            query.SelectClause.SelectAllProperties = true;
+            query.SelectClause.SelectDistinctValues = true;
+            //make the query
+            ECP.PersistenceService psvc = ECP.PersistenceServiceFactory.GetService();
+            ECP.QueryResults pResult = psvc.ExecuteQuery(conn, query, 100);
+
+            // loop through the results.
+            if (pResult.Count>0)
+                infoList = new List<LocationInformation>();
+
+            for (int i = 0; i < pResult.Count; ++i)
+            {
+                ECOI.IECInstance iInstance;
+
+                if (pResult.TryGetElement(i, out iInstance))
+                {
+                    TagItemSet tset;
+                    tset = FindHostElement(iInstance, conn);
+                    if (tset.filePos > 0)
+                    {
+                        LocationInformation locationInfo = new LocationInformation();
+                        BCOM.Element pElement;
+                        string clsName;
+                        string propName;
+                        string propValue;
+                        BCOM.ModelReference oModel = WorkPackageAddin.ComApp.MdlGetModelReferenceFromModelRefP((int)tset.modelID);
+                        pElement = oModel.GetElementByID(tset.filePos);
+                        locationInfo.file_name = oModel.DesignFile.Name;
+                        locationInfo.model_name = oModel.Name; //usually default...
+                        locationInfo.file_position = tset.filePos;
+                        propName = "LOCATION_X";
+                        propValue = ItemSetUtilities.populateData(pElement,out clsName,propName,conn);
+                        locationInfo.LOCATION_X = Double.Parse(propValue);
+                        propName = "LOCATION_Y";
+                        propValue = ItemSetUtilities.populateData(pElement, out clsName, propName, conn);
+                        locationInfo.LOCATION_Y = Double.Parse(propValue);
+                        propName = "LOCATION_Z";
+                        propValue = ItemSetUtilities.populateData(pElement, out clsName, propName, conn);
+                        locationInfo.LOCATION_Z = Double.Parse(propValue);
+                        infoList.Add(locationInfo);
+                    }
+                        
+                }
+            }
+            if (pResult.Count == 0)
+                WorkPackageAddin.ComApp.MessageCenter.AddMessage("No Items found", "the query " + query.ToString(), BCOM.MsdMessageCenterPriority.Info, false);
+
+            WorkPackageAddin.CloseConnection(conn);
+            return infoList;
+        }
+        /// <summary>
         /// this will find the elements that have the value for the iso sheet property.
         /// it needs a search string 
         /// </summary>
@@ -536,10 +600,7 @@ namespace WorkPackageApplication
                 usesLike = ECPQ.RelationalOperator.LIKE;
 
             //get all the properties
-            query.SelectClause.SelectAllProperties = true;
-            //this was slow.
-            //ECPQ.QueryHelper.SelectAllRelatedInstances(query, true, 3);
-           
+            query.SelectClause.SelectAllProperties = true;         
             //since this query is using a specific named propery we need to find
             //a class that has this property
             ECOS.IECProperty namedProperty=null;
@@ -548,7 +609,6 @@ namespace WorkPackageApplication
                 while ((namedProperty == null) && (clsEnum.MoveNext()))
                 {
                     pClass = (ECOS.IECClass)clsEnum.Current;
-
                     namedProperty = pClass[propName];
                 }
             }
@@ -581,26 +641,29 @@ namespace WorkPackageApplication
             return elList;
         }
         /// <summary>
-        /// get a single element
+        /// gets a collection of elements based on the property name and the 
+        /// array of parameters passed in.
         /// </summary>
-        /// <param name="schema">The schema to use</param>
-        /// <param name="className">the class for the business data</param>
-        /// <param name="propName">The key property</param>
-        /// <param name="value">the key value </param>
-        /// <param name="allClasses">use all classes</param>
-        /// <param name="useLike">use a like search</param>
+        /// <param name="pSchema">the schema to use</param>
+        /// <param name="className">the class that is being looked for NULL if all</param>
+        /// <param name="propName">the property to key on .</param>
+        /// <param name="values">the array of values to look for.</param>
+        /// <param name="allClasses">to use all the classes if null is passed for the class name</param>
+        /// <param name="useLike">use a like operator.</param>
+        /// <param name="conn">the connection to use for query.</param>
         /// <returns></returns>
-        public static BCOM.Element FindSingleElement(ECOS.IECSchema pSchema, string className,
-                                                     string propName, string value,
+        public static List<BCOM.Element> GetCollectionOfElementsByProp (ECOS.IECSchema pSchema,
+                                                     string className,
+                                                     string propName, //GUID
+                                                     string[] values, //the array of guids
                                                      Boolean allClasses, Boolean useLike,
                                                      ECSR.RepositoryConnection conn)
         {
+            List <BCOM.Element> elements=null;
             BCOM.Element el = null;
-            
+            //Debugger.Launch();
             //put in a default class name to look for
             string lastClassName = "EQUIPMENT";
-           
-           
             //get the list of classes that are available
             System.Collections.IEnumerator clsEnum = WorkPackageAddin.GetClassesInSchema(pSchema);
             string[] names = WorkPackageAddin.GetAllClassNamesInSchema(pSchema);
@@ -621,16 +684,110 @@ namespace WorkPackageApplication
             else
                 pClass = null;
 
-            //ECPQ.QueryHelper.SetPolymorphic(query, true);
-            //ECPQ.QueryHelper.SelectLogicalChildInstances(query, conn, true, 3);
+            //since this query is using a specific named propery we need to find
+            //a class that has this property
+            ECOS.IECProperty namedProperty = null;
+            try
+            {
+                while ((namedProperty == null) && (clsEnum.MoveNext()))
+                {
+                    pClass = (ECOS.IECClass)clsEnum.Current;
+
+                    namedProperty = pClass[propName];
+                }
+            }
+            catch (Bentley.ECObjects.ECObjectsException.ArgumentError ae) { Debug.WriteLine(ae.Message); }
+
+            if (namedProperty != null)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(values[0]);
+                for (int i = 1; i < values.Length; i++)
+                    sb.Append(" OR GUID = "+ values[i]);
+                try
+                    {
+                        for (int j = 0; j < values.Length; j++)
+                        {
+                            ECPQ.QueryHelper.WherePropertyExpressions(query, namedProperty, ECPQ.RelationalOperator.EQ, values[j]);
+                            if (j > 0)
+                                query.WhereClause.SetLogicalOperatorAfter(j - 1, ECPQ.LogicalOperator.OR);
+                        }
+                    }
+                    catch (Exception e) { Console.WriteLine(e.Message); }
+            }
+            //make the query
+            ECP.PersistenceService psvc = ECP.PersistenceServiceFactory.GetService();
+            ECP.QueryResults pResult = psvc.ExecuteQuery(conn, query, 100);
+            if (pResult.Count > 0)
+                elements = new List<BCOM.Element>();
+            
+            // loop through the results.
+            for (int i = 0; i < pResult.Count; ++i)
+            {
+                ECOI.IECInstance iInstance;
+
+                if (pResult.TryGetElement(i, out iInstance))
+                {
+                    TagItemSet tset;
+                    tset = FindHostElement(iInstance, conn);
+                    if (tset.filePos > 0)
+                    {
+                        //get the element.
+                        BCOM.ModelReference oModel = WorkPackageAddin.ComApp.MdlGetModelReferenceFromModelRefP((int)tset.modelID);
+                        el = oModel.GetElementByID(tset.filePos);
+                        if (null != el)
+                            elements.Add(el);
+                    }
+                }
+            }
+            if (pResult.Count == 0)
+                WorkPackageAddin.ComApp.MessageCenter.AddMessage("No Items found", "the query " + query.ToString(), BCOM.MsdMessageCenterPriority.Info, false);
+
+
+            return elements;
+        }
+        /// <summary>
+        /// get a single element
+        /// </summary>
+        /// <param name="schema">The schema to use</param>
+        /// <param name="className">the class for the business data</param>
+        /// <param name="propName">The key property</param>
+        /// <param name="value">the key value </param>
+        /// <param name="allClasses">use all classes</param>
+        /// <param name="useLike">use a like search</param>
+        /// <returns></returns>
+        public static BCOM.Element FindSingleElement(ECOS.IECSchema pSchema, string className,
+                                                     string propName, string value,
+                                                     Boolean allClasses, Boolean useLike,
+                                                     ECSR.RepositoryConnection conn)
+        {
+            BCOM.Element el = null;
+            
+            //put in a default class name to look for
+            string lastClassName = "EQUIPMENT";
+            //get the list of classes that are available
+            System.Collections.IEnumerator clsEnum = WorkPackageAddin.GetClassesInSchema(pSchema);
+            string[] names = WorkPackageAddin.GetAllClassNamesInSchema(pSchema);
+            //building a query
+            ECPQ.ECQuery query;
+            if (allClasses)
+            {
+                query = ECPQ.QueryHelper.CreateQuery(pSchema, names);
+                lastClassName = names[names.Length - 1];
+            }
+            else
+                query = ECPQ.QueryHelper.CreateQuery(pSchema, className);
+
+            ECOS.IECClass pClass;
+
+            if (className.Length > 1)
+                pClass = pSchema[className];
+            else
+                pClass = null;
+
             ECPQ.RelationalOperator usesLike = ECPQ.RelationalOperator.EQ;
             if (useLike)
                 usesLike = ECPQ.RelationalOperator.LIKE;
-
-            //get all the properties
-            //query.SelectClause.SelectAllProperties = true;
-            //this was slow.
-            //ECPQ.QueryHelper.SelectAllRelatedInstances(query, true, 3);
 
             //since this query is using a specific named propery we need to find
             //a class that has this property

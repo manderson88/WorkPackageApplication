@@ -44,18 +44,29 @@
         <Keyword CommandWord="Build"></Keyword>
         <Keyword CommandWord="Get"></Keyword>
         <Keyword CommandWord="OpenWork"></Keyword>
-        <Keyword CommandWord="Add"></Keyword>
+      <!--  <Keyword CommandWord="Add"></Keyword>
         <Keyword CommandWord="Process"></Keyword>
-        <Keyword CommandWord="New"></Keyword>
+        <Keyword CommandWord="New"></Keyword> -->
         <Keyword CommandWord="Move"></Keyword>
+        <Keyword CommandWord="OpenConn"></Keyword>
         <Keyword CommandWord="Close"></Keyword>
         <Keyword CommandWord="AppID"></Keyword>
         <Keyword CommandWord="dataFile"></Keyword>
+        <Keyword CommandWord="runlist"></Keyword>
+        <Keyword CommandWord="clearIWP"></Keyword>
+        <Keyword CommandWord="itemcount"></Keyword>
+        <Keyword SubtableRef="Isolation" CommandWord="Isolate"><Options Required="true"/></Keyword>
+      </KeyinTable>
+      
+      <KeyinTable ID="Isolation">
+        <Keyword CommandWord="Available"></Keyword>
+        <Keyword CommandWord="IWP"></Keyword>
       </KeyinTable>
       
       <KeyinTable ID="LocEle">
         <Keyword CommandWord="General"></Keyword>
         <Keyword CommandWord="Widget"></Keyword>
+        <Keyword CommandWord="Item"></Keyword>
       </KeyinTable>
       
       <KeyinTable ID="Object">
@@ -74,14 +85,15 @@
 
     <!--Define a mapping from key-in to the method that handles the key-in.-->
     <KeyinHandlers>
-        <KeyinHandler Keyin="WPAddin OPEN DIALOG" Function="WorkPackageApplication.KeyinCommands.ECApiExampleCommand"/>
-        <KeyinHandler Keyin="WPAddin PLACE Widget" Function="WorkPackageApplication.KeyinCommands.ECApiExamplePlacementCommand"/>
-        <KeyinHandler Keyin="WPAddin LOCATE General" Function="WorkPackageApplication.KeyinCommands.ECApiExampleLocateCommand"/>
-        <KeyinHandler Keyin="WPAddin LOCATE Widget" Function="WorkPackageApplication.KeyinCommands.ECApiExampleLocateWidgetCommand"/>
-        <KeyinHandler Keyin="WPAddin Import" Function="WorkPackageApplication.KeyinCommands.ECApiExampleImportSchema"/>
-        <KeyinHandler Keyin="WPAddin AddClasses" Function="WorkPackageApplication.KeyinCommands.ECApiExampleAddClassesToElement"/>
-        <KeyinHandler Keyin="WPAddin AddNamedGroup" Function="WorkPackageApplication.KeyinCommands.ECApiExampleItemSet"/>
-        <KeyinHandler Keyin="WPAddin Place WorkTask" Function="WorkPackageApplication.KeyinCommands.ECApiExamplePlaceWorkTask"/>
+      <KeyinHandler Keyin="WPAddin OPEN DIALOG" Function="WorkPackageApplication.KeyinCommands.ECApiExampleCommand"/>
+      <KeyinHandler Keyin="WPAddin PLACE Widget" Function="WorkPackageApplication.KeyinCommands.ECApiExamplePlacementCommand"/>
+      <KeyinHandler Keyin="WPAddin LOCATE General" Function="WorkPackageApplication.KeyinCommands.ECApiExampleLocateCommand"/>
+      <KeyinHandler Keyin="WPAddin LOCATE Widget" Function="WorkPackageApplication.KeyinCommands.ECApiExampleLocateWidgetCommand"/>
+      <KeyinHandler Keyin="WPAddin LOCATE Item" Function="WorkPackageApplication.KeyinCommands.FindAllItem"/>
+      <KeyinHandler Keyin="WPAddin Import" Function="WorkPackageApplication.KeyinCommands.ECApiExampleImportSchema"/>
+      <KeyinHandler Keyin="WPAddin AddClasses" Function="WorkPackageApplication.KeyinCommands.ECApiExampleAddClassesToElement"/>
+      <KeyinHandler Keyin="WPAddin AddNamedGroup" Function="WorkPackageApplication.KeyinCommands.ECApiExampleItemSet"/>
+      <KeyinHandler Keyin="WPAddin Place WorkTask" Function="WorkPackageApplication.KeyinCommands.ECApiExamplePlaceWorkTask"/>
       <KeyinHandler Keyin="WPAddin UnEmbed" Function="WorkPackageApplication.KeyinCommands.ECApiExampleUnEmbedSchema"/>
       <KeyinHandler Keyin="WPAddin Place OfficeInfo" Function="WorkPackageApplication.KeyinCommands.ECApiExamplePlaceOfficeInfo"/>
       <KeyinHandler Keyin="WPAddin FindInstOf" Function="WorkPackageApplication.KeyinCommands.ECApiExampleFindInstancesOf"/>
@@ -94,13 +106,19 @@
       <KeyinHandler Keyin="WPAddin ItemSet Build" Function="WorkPackageApplication.KeyinCommands.AddElementToItemSet"/>
       <KeyinHandler Keyin="WPAddin ItemSet Get" Function="WorkPackageApplication.KeyinCommands.GetElementsInItemSet"/>
       <KeyinHandler Keyin="WPAddin ItemSet OpenWork" Function="WorkPackageApplication.KeyinCommands.OpenWorkFile"/>
-      <KeyinHandler Keyin="WPAddin ItemSet Add" Function="WorkPackageApplication.KeyinCommands.BuildList"/>
+     <!-- <KeyinHandler Keyin="WPAddin ItemSet Add" Function="WorkPackageApplication.KeyinCommands.BuildList"/>
       <KeyinHandler Keyin="WPAddin ItemSet Process" Function="WorkPackageApplication.KeyinCommands.ProcessList"/>
-      <KeyinHandler Keyin="WPAddin ItemSet New" Function="WorkPackageApplication.KeyinCommands.NewList"/>
+      <KeyinHandler Keyin="WPAddin ItemSet New" Function="WorkPackageApplication.KeyinCommands.NewList"/> -->
       <KeyinHandler Keyin="WPAddin ItemSet Move" Function="WorkPackageApplication.KeyinCommands.MoveBetweenGroups"/>
+      <KeyinHandler Keyin="WPAddin ItemSet OpenConn" Function="WorkPackageApplication.KeyinCommands.OpenConn"/>
       <KeyinHandler Keyin="WPAddin ItemSet Close" Function="WorkPackageApplication.KeyinCommands.CloseConnection"/>
       <KeyinHandler Keyin="WPAddin ItemSet AppId" Function="WorkPackageApplication.KeyinCommands.SetAppItemSetAppID"/>
       <KeyinHandler Keyin="wpaddin ItemSet dataFile" Function="WorkPackageApplication.KeyinCommands.SetDataFile"/>
+      <KeyinHandler Keyin="wpaddin ItemSet clearIWP" Function="WorkPackageApplication.KeyinCommands.IsolateClearIWP"/>
+      <KeyinHandler Keyin="WPAddin ItemSet Isolate Available" Function="WorkPackageApplication.KeyinCommands.IsolateAvailable"/>
+      <KeyinHandler Keyin="WPAddin ItemSet Isolate IWP" Function="WorkPackageApplication.KeyinCommands.IsolateIWP"/>
+      <KeyinHandler Keyin="WPAddin ItemSet runlist" Function="WorkPackageApplication.KeyinCommands.runlistcmd"/>
+      <KeyinHandler Keyin="wpaddin itemset itemcount" Function="WorkPackageApplication.KeyinCommands.SetItemSetCount"/>
       <KeyinHandler Keyin="WPAddin Exit" Function="WorkPackageApplication.KeyinCommands.ExitProcess"/>
     </KeyinHandlers>
 

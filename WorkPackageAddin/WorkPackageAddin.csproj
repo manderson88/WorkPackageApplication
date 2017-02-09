@@ -223,6 +223,9 @@
     <EmbeddedResource Include="ItemInfoForm.resx">
       <DependentUpon>ItemInfoForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LocationInformationFrm.resx">
+      <DependentUpon>LocationInformationFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="plcOfficeInfoSettings.resx">
       <DependentUpon>plcOfficeInfoSettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -285,6 +288,13 @@
       <DependentUpon>ItemInfoForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ItemSetUtilities.cs" />
+    <Compile Include="LocationInformation.cs" />
+    <Compile Include="LocationInformationFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LocationInformationFrm.Designer.cs">
+      <DependentUpon>LocationInformationFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PlaceOfficeInfo.cs" />
     <Compile Include="WorkPackageAddin.cs" />
     <Compile Include="ECApiExampleAddSchemaToElm.cs">

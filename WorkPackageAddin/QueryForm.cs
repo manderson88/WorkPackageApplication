@@ -70,7 +70,8 @@ namespace WorkPackageApplication
                 cbxSchemas.Items.Add(schemaNames[i]);
 
             WorkPackageAddin.CloseConnection(conn);
-            cbxSchemas.DropDownWidth = DropDownWidth(cbxSchemas) > 0 ? DropDownWidth(cbxSchemas) : cbxSchemas.DropDownWidth;
+            cbxSchemas.DropDownWidth = DropDownWidth(cbxSchemas) > 0 ? 
+                DropDownWidth(cbxSchemas) : cbxSchemas.DropDownWidth;
         }
         /// <summary>
         /// on the selected entry populates the combo box for classes available
@@ -93,7 +94,8 @@ namespace WorkPackageApplication
                 cbxClasses.Items.Add(clsNames[i]);
 
             WorkPackageAddin.CloseConnection(conn);
-            cbxClasses.DropDownWidth = DropDownWidth(cbxClasses) > 0 ? DropDownWidth(cbxClasses) : cbxClasses.DropDownWidth;
+            cbxClasses.DropDownWidth = DropDownWidth(cbxClasses) > 0 ? 
+                DropDownWidth(cbxClasses) : cbxClasses.DropDownWidth;
         }
         /// <summary>
         /// on selecting a class this populates the properties that are available
@@ -121,7 +123,8 @@ namespace WorkPackageApplication
                 cbxProperty.Items.Add(clsProp);
             }
             WorkPackageAddin.CloseConnection(conn);
-            cbxProperty.DropDownWidth = DropDownWidth(cbxProperty) > 0 ? DropDownWidth(cbxProperty) : cbxProperty.DropDownWidth;
+            cbxProperty.DropDownWidth = DropDownWidth(cbxProperty) > 0 ?
+                DropDownWidth(cbxProperty) : cbxProperty.DropDownWidth;
         }
         /// <summary>
         /// runs the query that has been selected.

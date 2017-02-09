@@ -1,0 +1,951 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<DgnData>
+  <ToolBoxes>
+    <NodeData name="SteelcaseFSL" allowChildren="true">
+      <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <ToolContainer>
+        <Dimension>0</Dimension>
+    </ToolContainer>
+    <UIType>ToolContainer</UIType>
+</Ustn_CustomTool></ECXAttrData>
+      <NodeData name="Place Furniture Symbol" allowChildren="false">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedTool</UIType>
+    <NamedTool>
+        <ToolType>0</ToolType>
+        <ToolDisplay>0</ToolDisplay>
+        <Icon>
+            <BitMapIcon>
+                <BitMapType>1464427374</BitMapType>
+                <BitMapName>place item</BitMapName>
+            </BitMapIcon>
+            <NamedToolType>BitMapIcon</NamedToolType>
+        </Icon>
+        <ProcessingData>
+            <BalloonText>Place Furniture Symbol</BalloonText>
+            <TemplatePath>None</TemplatePath>
+            <CmdString>VBA RUN BSIOpenForm</CmdString>
+            <AssociateTemplate>2</AssociateTemplate>
+        </ProcessingData>
+        <Dimension>0</Dimension>
+    </NamedTool>
+</Ustn_CustomTool></ECXAttrData>
+      </NodeData>
+      <NodeData name="Summary Report" allowChildren="false">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedTool</UIType>
+    <NamedTool>
+        <ToolType>0</ToolType>
+        <ToolDisplay>0</ToolDisplay>
+        <Icon>
+            <BitMapIcon>
+                <BitMapType>1464427374</BitMapType>
+                <BitMapName>summary</BitMapName>
+            </BitMapIcon>
+            <NamedToolType>BitMapIcon</NamedToolType>
+        </Icon>
+        <ProcessingData>
+            <BalloonText>Summary Report</BalloonText>
+            <TemplatePath>None</TemplatePath>
+            <CmdString>VBA RUN STC_OutputReport</CmdString>
+            <AssociateTemplate>2</AssociateTemplate>
+        </ProcessingData>
+        <Dimension>0</Dimension>
+    </NamedTool>
+</Ustn_CustomTool></ECXAttrData>
+      </NodeData>
+      <NodeData name="Release FSL SIF" allowChildren="false">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedTool</UIType>
+    <NamedTool>
+        <ToolType>0</ToolType>
+        <ToolDisplay>0</ToolDisplay>
+        <Icon>
+            <BitMapIcon>
+                <BitMapType>1464427374</BitMapType>
+                <BitMapName>specsif</BitMapName>
+            </BitMapIcon>
+            <NamedToolType>BitMapIcon</NamedToolType>
+        </Icon>
+        <ProcessingData>
+            <BalloonText>Release FSL SIF</BalloonText>
+            <TemplatePath>None</TemplatePath>
+            <CmdString>VBA RUN BSI_OutputSIF</CmdString>
+            <AssociateTemplate>2</AssociateTemplate>
+        </ProcessingData>
+        <Dimension>0</Dimension>
+    </NamedTool>
+</Ustn_CustomTool></ECXAttrData>
+      </NodeData>
+      <NodeData name="Release CAP SIF" allowChildren="false">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedTool</UIType>
+    <NamedTool>
+        <ToolType>0</ToolType>
+        <ToolDisplay>0</ToolDisplay>
+        <Icon>
+            <BitMapIcon>
+                <BitMapType>1464427374</BitMapType>
+                <BitMapName>capsif</BitMapName>
+            </BitMapIcon>
+            <NamedToolType>BitMapIcon</NamedToolType>
+        </Icon>
+        <ProcessingData>
+            <BalloonText>Release CAP SIF</BalloonText>
+            <TemplatePath>None</TemplatePath>
+            <CmdString>VBA RUN STC_OutputCAPSIF</CmdString>
+            <AssociateTemplate>2</AssociateTemplate>
+        </ProcessingData>
+        <Dimension>0</Dimension>
+    </NamedTool>
+</Ustn_CustomTool></ECXAttrData>
+      </NodeData>
+      <NodeData name="DOD BOM Rpt" allowChildren="false">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedTool</UIType>
+    <NamedTool>
+        <ToolType>0</ToolType>
+        <ToolDisplay>0</ToolDisplay>
+        <Icon>
+            <BitMapIcon>
+                <BitMapType>1464427374</BitMapType>
+                <BitMapName>summary</BitMapName>
+            </BitMapIcon>
+            <NamedToolType>BitMapIcon</NamedToolType>
+        </Icon>
+        <ProcessingData>
+            <BalloonText>DOD Bill of Materials</BalloonText>
+            <TemplatePath>None</TemplatePath>
+            <CmdString>VBA RUN BSI_OutputDODBOM</CmdString>
+            <AssociateTemplate>2</AssociateTemplate>
+        </ProcessingData>
+        <Dimension>0</Dimension>
+        <ShowHideCriteria>_DOD</ShowHideCriteria>
+    </NamedTool>
+</Ustn_CustomTool></ECXAttrData>
+      </NodeData>
+      <NodeData name="ReTag" allowChildren="false">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedTool</UIType>
+    <NamedTool>
+        <Dimension>0</Dimension>
+        <ToolDisplay>0</ToolDisplay>
+        <ToolType>0</ToolType>
+        <Icon>
+            <NamedToolType>BitMapIcon</NamedToolType>
+            <BitMapIcon>
+                <BitMapName>update</BitMapName>
+                <BitMapType>1464427374</BitMapType>
+            </BitMapIcon>
+        </Icon>
+        <ProcessingData>
+            <TemplatePath>None</TemplatePath>
+            <AssociateTemplate>2</AssociateTemplate>
+            <BalloonText>Re-Tag Steelcase Furniture</BalloonText>
+            <CmdString>VBA RUN BSI_UpdateTagDataOnModel</CmdString>
+        </ProcessingData>
+    </NamedTool>
+</Ustn_CustomTool></ECXAttrData>
+      </NodeData>
+      <NodeData name="Search FSL" allowChildren="false">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedTool</UIType>
+    <NamedTool>
+        <Dimension>0</Dimension>
+        <ToolDisplay>0</ToolDisplay>
+        <ToolType>0</ToolType>
+        <Icon>
+            <NamedToolType>RscIcon</NamedToolType>
+            <BitMapIcon>
+                <BitMapName>Tool</BitMapName>
+                <BitMapType>1464427374</BitMapType>
+            </BitMapIcon>
+            <RscIcon>
+                <RscType>1766026584</RscType>
+                <Owner>VIEWCTRL</Owner>
+                <IconOwner />
+                <RscId>60</RscId>
+                <ItemArg>0</ItemArg>
+                <IconType>0</IconType>
+                <IconID>60</IconID>
+            </RscIcon>
+        </Icon>
+        <ProcessingData>
+            <TemplatePath>None</TemplatePath>
+            <AssociateTemplate>2</AssociateTemplate>
+            <BalloonText>Search FSL library</BalloonText>
+            <CmdString>VBA RUN BSI_SearchItem</CmdString>
+        </ProcessingData>
+    </NamedTool>
+</Ustn_CustomTool></ECXAttrData>
+      </NodeData>
+      <NodeData name="Scrub Tags" allowChildren="false">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedTool</UIType>
+    <NamedTool>
+        <Dimension>0</Dimension>
+        <ToolDisplay>0</ToolDisplay>
+        <ToolType>0</ToolType>
+        <Icon>
+            <NamedToolType>BitMapIcon</NamedToolType>
+            <BitMapIcon>
+                <BitMapName>options</BitMapName>
+                <BitMapType>1464427374</BitMapType>
+            </BitMapIcon>
+        </Icon>
+        <ProcessingData>
+            <TemplatePath>None</TemplatePath>
+            <AssociateTemplate>2</AssociateTemplate>
+            <BalloonText>Remove Tags from Furniture</BalloonText>
+            <CmdString>VB RUN BSI_cmdStripTags</CmdString>
+        </ProcessingData>
+    </NamedTool>
+</Ustn_CustomTool></ECXAttrData>
+      </NodeData>
+      <NodeData name="About FSL" allowChildren="false">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedTool</UIType>
+    <NamedTool>
+        <Dimension>0</Dimension>
+        <ToolDisplay>0</ToolDisplay>
+        <ToolType>0</ToolType>
+        <Icon>
+            <NamedToolType>BitMapIcon</NamedToolType>
+            <BitMapIcon>
+                <BitMapName>BentleyLibrary</BitMapName>
+                <BitMapType>1464427374</BitMapType>
+            </BitMapIcon>
+        </Icon>
+        <ProcessingData>
+            <TemplatePath>None</TemplatePath>
+            <AssociateTemplate>2</AssociateTemplate>
+            <BalloonText>Steelcase FSL About</BalloonText>
+            <CmdString>VBA RUN BSI_applicationVersion</CmdString>
+        </ProcessingData>
+    </NamedTool>
+</Ustn_CustomTool></ECXAttrData>
+      </NodeData>
+    </NodeData>
+    <NodeData name="SteelcaseFSL2" allowChildren="true">
+      <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>ToolContainer</UIType>
+    <ToolContainer>
+        <Dimension>0</Dimension>
+    </ToolContainer>
+</Ustn_CustomTool></ECXAttrData>
+      <NodeData name="Place Typical" allowChildren="false">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedTool</UIType>
+    <NamedTool>
+        <Dimension>0</Dimension>
+        <ToolDisplay>0</ToolDisplay>
+        <ToolType>0</ToolType>
+        <Icon>
+            <NamedToolType>BitMapIcon</NamedToolType>
+            <BitMapIcon>
+                <BitMapName>place item</BitMapName>
+                <BitMapType>1464427374</BitMapType>
+            </BitMapIcon>
+        </Icon>
+        <ProcessingData>
+            <TemplatePath>None</TemplatePath>
+            <AssociateTemplate>2</AssociateTemplate>
+            <BalloonText>Place Typical</BalloonText>
+            <CmdString>VBA RUN BSI_PlaceTypicalTool</CmdString>
+        </ProcessingData>
+    </NamedTool>
+</Ustn_CustomTool></ECXAttrData>
+      </NodeData>
+      <NodeData name="Convert To 3D" allowChildren="false">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedTool</UIType>
+    <NamedTool>
+        <Dimension>3</Dimension>
+        <ToolDisplay>0</ToolDisplay>
+        <ToolType>0</ToolType>
+        <Icon>
+            <NamedToolType>BitMapIcon</NamedToolType>
+            <BitMapIcon>
+                <BitMapName>2d-3d</BitMapName>
+                <BitMapType>1464427374</BitMapType>
+            </BitMapIcon>
+        </Icon>
+        <ProcessingData>
+            <TemplatePath>None</TemplatePath>
+            <AssociateTemplate>2</AssociateTemplate>
+            <BalloonText>Convert To 3D</BalloonText>
+            <CmdString>VBA RUN STC_ConvertSelectedTo3D</CmdString>
+        </ProcessingData>
+    </NamedTool>
+</Ustn_CustomTool></ECXAttrData>
+      </NodeData>
+      <NodeData name="Convert To 2D" allowChildren="false">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedTool</UIType>
+    <NamedTool>
+        <Dimension>0</Dimension>
+        <ToolDisplay>0</ToolDisplay>
+        <ToolType>0</ToolType>
+        <Icon>
+            <NamedToolType>BitMapIcon</NamedToolType>
+            <BitMapIcon>
+                <BitMapName>3d-2d</BitMapName>
+                <BitMapType>1464427374</BitMapType>
+            </BitMapIcon>
+        </Icon>
+        <ProcessingData>
+            <TemplatePath>None</TemplatePath>
+            <AssociateTemplate>2</AssociateTemplate>
+            <BalloonText>Convert To 2D</BalloonText>
+            <CmdString>VBA Run STC_ConvertSelectedTo2D</CmdString>
+        </ProcessingData>
+    </NamedTool>
+</Ustn_CustomTool></ECXAttrData>
+      </NodeData>
+      <NodeData name="Exchange Symbol" allowChildren="false">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedTool</UIType>
+    <NamedTool>
+        <Icon>
+            <NamedToolType>RscIcon</NamedToolType>
+            <RscIcon>
+                <RscType>1766026596</RscType>
+                <Owner>USTN</Owner>
+                <IconOwner />
+                <RscId>-902</RscId>
+                <ItemArg>0</ItemArg>
+                <IconType>0</IconType>
+                <IconID>-902</IconID>
+            </RscIcon>
+            <BitMapIcon>
+                <BitMapType>1464427374</BitMapType>
+                <BitMapName>Tool</BitMapName>
+            </BitMapIcon>
+        </Icon>
+        <ProcessingData>
+            <CmdString>VBA RUN BSI_ExchangeCmd</CmdString>
+            <BalloonText>Excange Symbol</BalloonText>
+            <AssociateTemplate>2</AssociateTemplate>
+            <TemplatePath>None</TemplatePath>
+        </ProcessingData>
+        <ToolDisplay>0</ToolDisplay>
+        <ToolType>0</ToolType>
+        <Dimension>0</Dimension>
+    </NamedTool>
+</Ustn_CustomTool></ECXAttrData>
+      </NodeData>
+      <NodeData name="Edit Stlc Data" allowChildren="false">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedTool</UIType>
+    <NamedTool>
+        <Dimension>0</Dimension>
+        <ToolDisplay>0</ToolDisplay>
+        <ToolType>0</ToolType>
+        <Icon>
+            <NamedToolType>RscIcon</NamedToolType>
+            <BitMapIcon>
+                <BitMapName>CHANGESECTIONMARKERHEAD</BitMapName>
+                <BitMapType>1464427374</BitMapType>
+            </BitMapIcon>
+            <RscIcon>
+                <RscType>1766026596</RscType>
+                <Owner>TAGS</Owner>
+                <IconOwner />
+                <RscId>201</RscId>
+                <ItemArg>0</ItemArg>
+                <IconType>0</IconType>
+                <IconID>201</IconID>
+            </RscIcon>
+        </Icon>
+        <ProcessingData>
+            <TemplatePath>None</TemplatePath>
+            <AssociateTemplate>2</AssociateTemplate>
+            <BalloonText>Edit Steelcase Data</BalloonText>
+            <CmdString>VBA Run BSI_EditItemData</CmdString>
+        </ProcessingData>
+    </NamedTool>
+</Ustn_CustomTool></ECXAttrData>
+      </NodeData>
+      <NodeData name="Add Stlc Data" allowChildren="false">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedTool</UIType>
+    <NamedTool>
+        <Dimension>0</Dimension>
+        <ToolDisplay>0</ToolDisplay>
+        <ToolType>0</ToolType>
+        <Icon>
+            <NamedToolType>RscIcon</NamedToolType>
+            <BitMapIcon>
+                <BitMapName>COPYHANDLEUNFOCUSED</BitMapName>
+                <BitMapType>1464427374</BitMapType>
+            </BitMapIcon>
+            <RscIcon>
+                <RscType>1766026596</RscType>
+                <Owner>TAGS</Owner>
+                <IconOwner />
+                <RscId>202</RscId>
+                <ItemArg>0</ItemArg>
+                <IconType>0</IconType>
+                <IconID>202</IconID>
+            </RscIcon>
+        </Icon>
+        <ProcessingData>
+            <TemplatePath>None</TemplatePath>
+            <AssociateTemplate>2</AssociateTemplate>
+            <BalloonText>Add Steelcase tag to Graphic</BalloonText>
+            <CmdString>VBA Run BSI_MakeStlcItem</CmdString>
+        </ProcessingData>
+    </NamedTool>
+</Ustn_CustomTool></ECXAttrData>
+      </NodeData>
+      <NodeData name="Delete Stlc Data" allowChildren="false">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedTool</UIType>
+    <NamedTool>
+        <Dimension>0</Dimension>
+        <ToolDisplay>0</ToolDisplay>
+        <ToolType>0</ToolType>
+        <Icon>
+            <NamedToolType>RscIcon</NamedToolType>
+            <BitMapIcon>
+                <BitMapName>Tool</BitMapName>
+                <BitMapType>1464427374</BitMapType>
+            </BitMapIcon>
+            <RscIcon>
+                <RscType>1766026596</RscType>
+                <Owner>TAGS</Owner>
+                <IconOwner />
+                <RscId>205</RscId>
+                <ItemArg>0</ItemArg>
+                <IconType>0</IconType>
+                <IconID>205</IconID>
+            </RscIcon>
+        </Icon>
+        <ProcessingData>
+            <TemplatePath>None</TemplatePath>
+            <AssociateTemplate>2</AssociateTemplate>
+            <BalloonText>Remove Steelcase Data</BalloonText>
+            <CmdString>VBA Run BSI_DeleteDataCommand</CmdString>
+        </ProcessingData>
+    </NamedTool>
+</Ustn_CustomTool></ECXAttrData>
+      </NodeData>
+    </NodeData>
+    <NodeData name="UofAL" allowChildren="true">
+      <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>ToolContainer</UIType>
+    <ToolContainer>
+        <Dimension>0</Dimension>
+    </ToolContainer>
+</Ustn_CustomTool></ECXAttrData>
+      <NodeData name="UofALTool" allowChildren="false">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedTool</UIType>
+    <NamedTool>
+        <Dimension>0</Dimension>
+        <ToolDisplay>0</ToolDisplay>
+        <ToolType>0</ToolType>
+        <Icon>
+            <NamedToolType>RscIcon</NamedToolType>
+            <BitMapIcon>
+                <BitMapName>Tool</BitMapName>
+                <BitMapType>1464427374</BitMapType>
+            </BitMapIcon>
+            <RscIcon>
+                <RscType>1766026596</RscType>
+                <Owner>ANIMATOR</Owner>
+                <IconOwner />
+                <RscId>1</RscId>
+                <ItemArg>0</ItemArg>
+                <IconType>0</IconType>
+                <IconID>1</IconID>
+            </RscIcon>
+        </Icon>
+        <ProcessingData>
+            <TemplatePath>None</TemplatePath>
+            <AssociateTemplate>2</AssociateTemplate>
+            <BalloonText>EC Example Tool</BalloonText>
+            <CmdString>ecapiexample open</CmdString>
+        </ProcessingData>
+    </NamedTool>
+</Ustn_CustomTool></ECXAttrData>
+      </NodeData>
+    </NodeData>
+  </ToolBoxes>
+  <Tasks>
+    <NodeData name="Steelcase Tools" allowChildren="true">
+      <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>ToolContainer</UIType>
+    <ToolContainer>
+        <Dimension>0</Dimension>
+        <ShowIcon>True</ShowIcon>
+        <VerboseTask>False</VerboseTask>
+        <TaskType>2</TaskType>
+        <TaskLayoutMode>2</TaskLayoutMode>
+        <HelpID />
+        <ShowHideCriteria>_DOD</ShowHideCriteria>
+    </ToolContainer>
+</Ustn_CustomTool></ECXAttrData>
+      <NodeData name="SteelcaseFSL" allowChildren="true">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>ToolContainer</UIType>
+    <ToolContainer>
+        <Dimension>0</Dimension>
+    </ToolContainer>
+</Ustn_CustomTool></ECXAttrData>
+        <NodeData name="Place Furniture Symbol" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedToolRef</UIType>
+    <NamedToolRef>
+        <ToolPath>SteelcaseFSL\Place Furniture Symbol</ToolPath>
+    </NamedToolRef>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Summary Report" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedToolRef</UIType>
+    <NamedToolRef>
+        <ToolPath>SteelcaseFSL\Summary Report</ToolPath>
+    </NamedToolRef>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Release FSL SIF" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedToolRef</UIType>
+    <NamedToolRef>
+        <ToolPath>SteelcaseFSL\Release FSL SIF</ToolPath>
+    </NamedToolRef>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Release CAP SIF" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedToolRef</UIType>
+    <NamedToolRef>
+        <ToolPath>SteelcaseFSL\Release CAP SIF</ToolPath>
+    </NamedToolRef>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="DOD BOM Rpt" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedToolRef</UIType>
+    <NamedToolRef>
+        <ToolPath>SteelcaseFSL\DOD BOM Rpt</ToolPath>
+    </NamedToolRef>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="ReTag" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedToolRef</UIType>
+    <NamedToolRef>
+        <ToolPath>SteelcaseFSL\ReTag</ToolPath>
+    </NamedToolRef>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Search FSL" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedToolRef</UIType>
+    <NamedToolRef>
+        <ToolPath>SteelcaseFSL\Search FSL</ToolPath>
+    </NamedToolRef>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Scrub Tags" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedToolRef</UIType>
+    <NamedToolRef>
+        <ToolPath>SteelcaseFSL\Scrub Tags</ToolPath>
+    </NamedToolRef>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="About FSL" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedToolRef</UIType>
+    <NamedToolRef>
+        <ToolPath>SteelcaseFSL\About FSL</ToolPath>
+    </NamedToolRef>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+      </NodeData>
+      <NodeData name="SteelcaseFSL2" allowChildren="true">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>ToolContainer</UIType>
+    <ToolContainer>
+        <Dimension>0</Dimension>
+    </ToolContainer>
+</Ustn_CustomTool></ECXAttrData>
+        <NodeData name="Place Typical" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedToolRef</UIType>
+    <NamedToolRef>
+        <ToolPath>SteelcaseFSL2\Place Typical</ToolPath>
+    </NamedToolRef>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Convert To 3D" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedToolRef</UIType>
+    <NamedToolRef>
+        <ToolPath>SteelcaseFSL2\Convert To 3D</ToolPath>
+    </NamedToolRef>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Convert To 2D" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedToolRef</UIType>
+    <NamedToolRef>
+        <ToolPath>SteelcaseFSL2\Convert To 2D</ToolPath>
+    </NamedToolRef>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Exchange Symbol" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedToolRef</UIType>
+    <NamedToolRef>
+        <ToolPath>SteelcaseFSL2\Exchange Symbol</ToolPath>
+    </NamedToolRef>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Add Stlc Data" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedToolRef</UIType>
+    <NamedToolRef>
+        <ToolPath>SteelcaseFSL2\Add Stlc Data</ToolPath>
+    </NamedToolRef>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Edit Stlc Data" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedToolRef</UIType>
+    <NamedToolRef>
+        <ToolPath>SteelcaseFSL2\Edit Stlc Data</ToolPath>
+    </NamedToolRef>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Delete Stlc Data" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedToolRef</UIType>
+    <NamedToolRef>
+        <ToolPath>SteelcaseFSL2\Delete Stlc Data</ToolPath>
+    </NamedToolRef>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+      </NodeData>
+    </NodeData>
+    <NodeData name="UofAL Details" allowChildren="true">
+      <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>ToolContainer</UIType>
+    <ToolContainer>
+        <Dimension>0</Dimension>
+        <ShowIcon>True</ShowIcon>
+        <VerboseTask>False</VerboseTask>
+        <TaskType>0</TaskType>
+        <TaskLayoutMode>0</TaskLayoutMode>
+        <HelpID />
+    </ToolContainer>
+</Ustn_CustomTool></ECXAttrData>
+      <NodeData name="UofALTool" allowChildren="false">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>NamedToolRef</UIType>
+    <NamedToolRef>
+        <ToolPath>UofAL\UofALTool</ToolPath>
+    </NamedToolRef>
+</Ustn_CustomTool></ECXAttrData>
+      </NodeData>
+    </NodeData>
+  </Tasks>
+  <MainTasks />
+  <Menus>
+    <NodeData name="Steelcase" allowChildren="true">
+      <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenu</UIType>
+    <UserMenu>
+        <Dimension>0</Dimension>
+        <ModificationData>
+            <RelativeLocation>1</RelativeLocation>
+            <MenuId>-556</MenuId>
+            <ItemSearchId>85</ItemSearchId>
+        </ModificationData>
+    </UserMenu>
+</Ustn_CustomTool></ECXAttrData>
+      <NodeData name="Steelcase Primary Tools" allowChildren="true">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenu</UIType>
+    <UserMenu>
+        <Dimension>0</Dimension>
+    </UserMenu>
+</Ustn_CustomTool></ECXAttrData>
+        <NodeData name="Place Furniture Symbol" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenuItem</UIType>
+    <UserMenuItem>
+        <Dimension>0</Dimension>
+        <Accelerator>0</Accelerator>
+        <Type>2</Type>
+        <ToolMenuItem>
+            <ToolPath>Steelcase Primary Tools\Place Furniture Symbol</ToolPath>
+        </ToolMenuItem>
+    </UserMenuItem>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Search FSL" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenuItem</UIType>
+    <UserMenuItem>
+        <Dimension>0</Dimension>
+        <Accelerator>0</Accelerator>
+        <Type>2</Type>
+        <ToolMenuItem>
+            <ToolPath>Steelcase Primary Tools\Search FSL</ToolPath>
+        </ToolMenuItem>
+    </UserMenuItem>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Place Typical" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenuItem</UIType>
+    <UserMenuItem>
+        <Dimension>0</Dimension>
+        <Accelerator>0</Accelerator>
+        <Type>2</Type>
+        <ToolMenuItem>
+            <ToolPath>Steelcase Primary Tools\Place Typical</ToolPath>
+        </ToolMenuItem>
+    </UserMenuItem>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Open As Toolbox" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenuItem</UIType>
+    <UserMenuItem>
+        <Dimension>0</Dimension>
+        <Type>3</Type>
+        <CmdMenuItem>
+            <ProcessingData>
+                <CmdString>customize open toolbox Steelcase Primary Tools</CmdString>
+            </ProcessingData>
+            <Icon>
+                <NamedToolType>BitMapIcon</NamedToolType>
+                <BitMapIcon>
+                    <BitMapType>1464427374</BitMapType>
+                    <BitMapName>Toolbox</BitMapName>
+                </BitMapIcon>
+            </Icon>
+        </CmdMenuItem>
+        <Accelerator>0</Accelerator>
+    </UserMenuItem>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+      </NodeData>
+      <NodeData name="Steelcase Modification Tools" allowChildren="true">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenu</UIType>
+    <UserMenu>
+        <Dimension>0</Dimension>
+    </UserMenu>
+</Ustn_CustomTool></ECXAttrData>
+        <NodeData name="Add Stlc Data" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenuItem</UIType>
+    <UserMenuItem>
+        <Dimension>0</Dimension>
+        <Accelerator>0</Accelerator>
+        <Type>2</Type>
+        <ToolMenuItem>
+            <ToolPath>Steelcase Modification Tools\Add Stlc Data</ToolPath>
+        </ToolMenuItem>
+    </UserMenuItem>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Edit Stlc Data" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenuItem</UIType>
+    <UserMenuItem>
+        <Dimension>0</Dimension>
+        <Accelerator>0</Accelerator>
+        <Type>2</Type>
+        <ToolMenuItem>
+            <ToolPath>Steelcase Modification Tools\Edit Stlc Data</ToolPath>
+        </ToolMenuItem>
+    </UserMenuItem>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Delete Stlc Data" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenuItem</UIType>
+    <UserMenuItem>
+        <Dimension>0</Dimension>
+        <Accelerator>0</Accelerator>
+        <Type>2</Type>
+        <ToolMenuItem>
+            <ToolPath>Steelcase Modification Tools\Delete Stlc Data</ToolPath>
+        </ToolMenuItem>
+    </UserMenuItem>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Exchange Symbol" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenuItem</UIType>
+    <UserMenuItem>
+        <Dimension>0</Dimension>
+        <Accelerator>0</Accelerator>
+        <Type>2</Type>
+        <ToolMenuItem>
+            <ToolPath>Steelcase Modification Tools\Exchange Symbol</ToolPath>
+        </ToolMenuItem>
+    </UserMenuItem>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Convert To 2D" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenuItem</UIType>
+    <UserMenuItem>
+        <Dimension>0</Dimension>
+        <Accelerator>0</Accelerator>
+        <Type>2</Type>
+        <ToolMenuItem>
+            <ToolPath>Steelcase Modification Tools\Convert To 2D</ToolPath>
+        </ToolMenuItem>
+    </UserMenuItem>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Convert To 3D" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenuItem</UIType>
+    <UserMenuItem>
+        <Dimension>3</Dimension>
+        <Accelerator>0</Accelerator>
+        <Type>2</Type>
+        <ToolMenuItem>
+            <ToolPath>Steelcase Modification Tools\Convert To 3D</ToolPath>
+        </ToolMenuItem>
+    </UserMenuItem>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Open As Toolbox" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenuItem</UIType>
+    <UserMenuItem>
+        <Dimension>0</Dimension>
+        <Type>3</Type>
+        <CmdMenuItem>
+            <ProcessingData>
+                <CmdString>customize open toolbox Steelcase Modification Tools</CmdString>
+            </ProcessingData>
+            <Icon>
+                <NamedToolType>BitMapIcon</NamedToolType>
+                <BitMapIcon>
+                    <BitMapType>1464427374</BitMapType>
+                    <BitMapName>Toolbox</BitMapName>
+                </BitMapIcon>
+            </Icon>
+        </CmdMenuItem>
+        <Accelerator>0</Accelerator>
+    </UserMenuItem>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+      </NodeData>
+      <NodeData name="Steelcase Reporting Tools" allowChildren="true">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenu</UIType>
+    <UserMenu>
+        <Dimension>0</Dimension>
+    </UserMenu>
+</Ustn_CustomTool></ECXAttrData>
+        <NodeData name="Summary Report" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenuItem</UIType>
+    <UserMenuItem>
+        <Dimension>0</Dimension>
+        <Accelerator>0</Accelerator>
+        <Type>2</Type>
+        <ToolMenuItem>
+            <ToolPath>Steelcase Reporting Tools\Summary Report</ToolPath>
+        </ToolMenuItem>
+    </UserMenuItem>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Release FSL SIF" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenuItem</UIType>
+    <UserMenuItem>
+        <Dimension>0</Dimension>
+        <Accelerator>0</Accelerator>
+        <Type>2</Type>
+        <ToolMenuItem>
+            <ToolPath>Steelcase Reporting Tools\Release FSL SIF</ToolPath>
+        </ToolMenuItem>
+    </UserMenuItem>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Release CAP SIF" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenuItem</UIType>
+    <UserMenuItem>
+        <Dimension>0</Dimension>
+        <Accelerator>0</Accelerator>
+        <Type>2</Type>
+        <ToolMenuItem>
+            <ToolPath>Steelcase Reporting Tools\Release CAP SIF</ToolPath>
+        </ToolMenuItem>
+    </UserMenuItem>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+        <NodeData name="Open As Toolbox" allowChildren="false">
+          <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenuItem</UIType>
+    <UserMenuItem>
+        <Dimension>0</Dimension>
+        <Type>3</Type>
+        <CmdMenuItem>
+            <ProcessingData>
+                <CmdString>customize open Toolbox Steelcase Reporting Tools</CmdString>
+            </ProcessingData>
+            <Icon>
+                <NamedToolType>BitMapIcon</NamedToolType>
+                <BitMapIcon>
+                    <BitMapType>1464427374</BitMapType>
+                    <BitMapName>Toolbox</BitMapName>
+                </BitMapIcon>
+            </Icon>
+        </CmdMenuItem>
+        <Accelerator>0</Accelerator>
+    </UserMenuItem>
+</Ustn_CustomTool></ECXAttrData>
+        </NodeData>
+      </NodeData>
+    </NodeData>
+    <NodeData name="SteelcaseFSL Tools" allowChildren="true">
+      <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenu</UIType>
+    <UserMenu>
+        <Dimension>0</Dimension>
+        <ModificationData>
+            <RelativeLocation>1</RelativeLocation>
+            <MenuId>-556</MenuId>
+            <ItemSearchId>33</ItemSearchId>
+        </ModificationData>
+        <ShowHideCriteria>_DOD</ShowHideCriteria>
+        <EnableDisableCriteria>_FSL</EnableDisableCriteria>
+    </UserMenu>
+</Ustn_CustomTool></ECXAttrData>
+      <NodeData name="Place Furniture" allowChildren="false">
+        <ECXAttrData><Ustn_CustomTool xmlns="Ustn_CustomTool.01.00">
+    <UIType>UserMenuItem</UIType>
+    <UserMenuItem>
+        <Dimension>0</Dimension>
+        <Type>3</Type>
+        <CmdMenuItem>
+            <ProcessingData>
+                <CmdString>VBA RUN BSIOpenForm</CmdString>
+            </ProcessingData>
+        </CmdMenuItem>
+        <Accelerator>0</Accelerator>
+    </UserMenuItem>
+</Ustn_CustomTool></ECXAttrData>
+      </NodeData>
+    </NodeData>
+  </Menus>
+  <ContextMenus />
+  <ViewPopupMenus />
+  <TentativePopupMenus />
+</DgnData>
